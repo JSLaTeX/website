@@ -1,14 +1,4 @@
-import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
-import {
-	createOnigScanner,
-	createOnigString,
-	loadWASM,
-} from "vscode-oniguruma";
-import { outdent } from "outdent";
-import type { LanguageId } from "./register";
-import type { ScopeName, TextMateGrammar, ScopeNameInfo } from "./providers";
-
-// Recall we are using MonacoWebpackPlugin. According to the
+// Recall we are using Vite. According to the
 // monaco-editor-webpack-plugin docs, we must use:
 //
 // import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
@@ -18,6 +8,17 @@ import type { ScopeName, TextMateGrammar, ScopeNameInfo } from "./providers";
 // import * as monaco from 'monaco-editor';
 //
 // because we are shipping only a subset of the languages.
+import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import {
+	createOnigScanner,
+	createOnigString,
+	loadWASM,
+} from "vscode-oniguruma";
+import { outdent } from "outdent";
+import { compileJsLatex } from "../latex";
+import type { LanguageId } from "./register";
+import type { ScopeName, TextMateGrammar, ScopeNameInfo } from "./providers";
+
 import { SimpleLanguageInfoProvider } from "./providers";
 import { registerLanguages } from "./register";
 import { rehydrateRegexps } from "./configuration";
@@ -32,7 +33,13 @@ interface DemoScopeNameInfo extends ScopeNameInfo {
 	path: string;
 }
 
-export async function loadMonacoEditor(element: HTMLElement) {
+type CreateMonacoEditorOptions = {
+	readonly?: boolean;
+};
+export async function createMonacoEditor(
+	element: HTMLElement,
+	{ readonly }: CreateMonacoEditorOptions = {}
+) {
 	// Adding a new TextMate grammar entails the following:
 	// - adding an entry in the languages array
 	// - adding an entry in the grammars map
@@ -68,7 +75,6 @@ export async function loadMonacoEditor(element: HTMLElement) {
 	const fetchGrammar = async (
 		scopeName: ScopeName
 	): Promise<TextMateGrammar> => {
-		console.log(scopeName);
 		switch (scopeName) {
 			case "text.tex.latex":
 				return {
@@ -98,7 +104,6 @@ export async function loadMonacoEditor(element: HTMLElement) {
 	const fetchConfiguration = async (
 		language: LanguageId
 	): Promise<monaco.languages.LanguageConfiguration> => {
-		console.log(language);
 		let rawConfiguration: string;
 		if (language === "jslatex") {
 			rawConfiguration = JSON.stringify(jsLatexConfiguration);
@@ -135,13 +140,15 @@ export async function loadMonacoEditor(element: HTMLElement) {
 	);
 
 	const language = "jslatex";
-	const value = getSampleCodeForLanguage(language);
+	const sampleCode = getSampleCodeForLanguage(language);
+	const value = readonly ? await compileJsLatex(sampleCode) : sampleCode;
 
 	const editor = monaco.editor.create(element, {
 		value,
 		language,
 		theme: "vs-light",
 		lineNumbers: "off",
+		readOnly: readonly,
 		minimap: {
 			enabled: false,
 		},
