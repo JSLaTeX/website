@@ -187,6 +187,7 @@ function getSampleCodeForLanguage(language: LanguageId): string {
 
 			\begin{document}
 			<?
+				// Try changing the following variable!
 				const magicSquare = [
 					[2, 7, 6],
 					[9, 5, 1],
