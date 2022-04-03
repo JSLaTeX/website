@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@fontsource/inter": "^4.5.7",
+		"@vueuse/core": "^8.2.3",
 		"dot-prop": "^7.2.0",
 		"esbuild-wasm": "^0.14.30",
 		"jslatex": "^0.1.11",

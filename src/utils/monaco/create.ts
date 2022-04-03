@@ -189,7 +189,7 @@ function getSampleCodeForLanguage(language: LanguageId): string {
 				];
 			?>
 			\begin{tabular}{|c|c|c|c|}
-				\\\hline
+				\hline
 				<? for (let rowIndex = 0; rowIndex < 4; rowIndex += 1) { ?>
 					<? for (let columnIndex = 0; columnIndex < 4; columnIndex += 1) { ?>
 						<? if (rowIndex === 3 && columnIndex === 3) { ?>
@@ -204,7 +204,7 @@ function getSampleCodeForLanguage(language: LanguageId): string {
 							<?# Ramda.js is exposed in the top level for convenient utility functions! ?>
 							<?= R.sum(magicSquare[rowIndex]) ?>
 						<? } else if (rowIndex === 3) { ?>
-							<?= R.sum(magicSquare.map(row => row[columnIndex])) ?>
+							<?= R.sum(magicSquare.map(row => row[columnIndex])) ?> &
 						<? } else { ?>
 							<?= magicSquare[rowIndex][columnIndex] ?> &
 						<? } ?>
