@@ -13,7 +13,7 @@ export default defineConfig({
 		quasar(),
 	],
 	build: {
-		minify: false,
+		target: 'esnext',
 		rollupOptions: {
 			external: [/node:.*/],
 		},
