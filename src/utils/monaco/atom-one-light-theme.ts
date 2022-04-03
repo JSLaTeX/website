@@ -276,11 +276,6 @@ const atomOneLightTheme: IRawTheme = {
 			scope: ['meta.tag'],
 			settings: { foreground: '#383A42' },
 		},
-		{
-			name: 'Underline',
-			scope: ['underline'],
-			settings: { 'text-decoration': 'underline' },
-		},
 		{ name: 'None', scope: ['none'], settings: { foreground: '#383A42' } },
 		{
 			name: 'Invalid Deprecated',
@@ -439,11 +434,6 @@ const atomOneLightTheme: IRawTheme = {
 				'source.elixir section',
 			],
 			settings: { foreground: '#696C77' },
-		},
-		{
-			name: 'Source Gfm Markup',
-			scope: ['source.gfm markup'],
-			settings: { '-webkit-font-smoothing': 'auto' },
 		},
 		{
 			name: 'Source Gfm Link Entity',
