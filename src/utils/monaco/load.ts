@@ -25,7 +25,8 @@ import VsCodeDarkTheme from "./vs-dark-plus-theme";
 import jsLatexTmLanguage from "./grammars/JSLaTeX.tmLanguage.json";
 import jsLatexConfiguration from "./configurations/jslatex.json";
 import latexTmLanguage from "./grammars/LaTeX.tmLanguage.json";
-import latexConfiguration from "./configurations/latex.json";
+import typescriptTmLanguage from "./grammars/TypeScript.tmLangauge.json";
+import texTmLanguage from "./grammars/TeX.tmLanguage.json";
 
 interface DemoScopeNameInfo extends ScopeNameInfo {
 	path: string;
@@ -38,54 +39,68 @@ export async function loadMonacoEditor(element: HTMLElement) {
 	// - making the TextMate file available in the grammars/ folder
 	// - making the monaco.languages.LanguageConfiguration available in the
 	//   configurations/ folder.
-	//
-	// You likely also want to add an entry in getSampleCodeForLanguage() and
-	// change the call to main() above to pass your LanguageId.
 	const languages: monaco.languages.ILanguageExtensionPoint[] = [
-		{
-			id: "jslatex",
-			extensions: [".tex"],
-			aliases: ["JSLaTeX"],
-		},
-		{
-			id: "latex",
-			extensions: [".tex"],
-			aliases: ["LaTeX"],
-		},
+		{ id: "jslatex" },
+		{ id: "latex" },
+		{ id: "tex" },
+		{ id: "typescript" },
 	];
 
 	const grammars: Record<string, DemoScopeNameInfo> = {
 		"text.tex.latex.jslatex": {
-			language: "latex",
+			language: "jslatex",
 			path: "JSLaTeX.tmLanguage.json",
+		},
+		"text.tex.latex": {
+			language: "latex",
+			path: "LaTeX.tmLanguage.json",
+		},
+		"text.tex": {
+			language: "tex",
+			path: "TeX.tmLanguage.json",
+		},
+		"source.ts": {
+			language: "typescript",
+			path: "TypeScript.tmLanguage.json",
 		},
 	};
 
 	const fetchGrammar = async (
 		scopeName: ScopeName
 	): Promise<TextMateGrammar> => {
-		if (scopeName === "text.tex.latex") {
-			return {
-				grammar: JSON.stringify(latexTmLanguage),
-				type: "json",
-			};
-		} else if (scopeName === "text.tex.latex.jslatex") {
-			return {
-				grammar: JSON.stringify(jsLatexTmLanguage),
-				type: "json",
-			};
-		} else {
-			throw new Error(`Unknown scope: ${scopeName}`);
+		console.log(scopeName);
+		switch (scopeName) {
+			case "text.tex.latex":
+				return {
+					grammar: JSON.stringify(latexTmLanguage),
+					type: "json",
+				};
+			case "text.tex.latex.jslatex":
+				return {
+					grammar: JSON.stringify(jsLatexTmLanguage),
+					type: "json",
+				};
+			case "source.ts":
+				return {
+					grammar: JSON.stringify(typescriptTmLanguage),
+					type: "json",
+				};
+			case "text.tex":
+				return {
+					grammar: JSON.stringify(texTmLanguage),
+					type: "json",
+				};
+			default:
+				throw new Error(`Unknown scope: ${scopeName}`);
 		}
 	};
 
 	const fetchConfiguration = async (
 		language: LanguageId
 	): Promise<monaco.languages.LanguageConfiguration> => {
+		console.log(language);
 		let rawConfiguration: string;
-		if (language === "latex") {
-			rawConfiguration = JSON.stringify(latexConfiguration);
-		} else if (language === "jslatex") {
+		if (language === "jslatex") {
 			rawConfiguration = JSON.stringify(jsLatexConfiguration);
 		} else {
 			throw new Error(`Unknown langauge ID: ${language}`);
@@ -96,7 +111,7 @@ export async function loadMonacoEditor(element: HTMLElement) {
 
 	const data: ArrayBuffer | Response = await loadVSCodeOnigurumWASM();
 
-	void loadWASM(data);
+	await loadWASM(data);
 
 	const onigLib = Promise.resolve({
 		createOnigScanner,
