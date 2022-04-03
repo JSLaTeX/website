@@ -89,22 +89,20 @@ async function compileLatexPdf(latex: string) {
 </script>
 
 <template>
-	<div class="row w-full">
-		<div>
+	<div class="column w-full">
+		<div class="row h-60">
 			<textarea
-				class="border-2 h-full"
+				class="border-2 flex-1"
 				v-model="latexTextareaContent"
 				@change="compileLatex(latexTextareaContent)"
 			>
 			</textarea>
 
-			<button @click="compileLatex(latexTextareaContent)">Compile</button>
+			<div class="flex-1">
+				{{ compiledLatex }}
+			</div>
 		</div>
 
-		<br />
-		Result:
-		<div>
-			{{ compiledLatex }}
-		</div>
+		<button @click="compileLatex(latexTextareaContent)">Compile</button>
 	</div>
 </template>

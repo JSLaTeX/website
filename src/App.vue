@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import JslatexDemo from "./components/jslatex-demo.vue";
-import LandingBanner from "./components/landing-banner.vue.js";
+import LandingBanner from "./components/landing-banner.vue";
 </script>
 
 <template>
