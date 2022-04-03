@@ -5,13 +5,17 @@ import windiCss from "vite-plugin-windicss";
 import { quasar, transformAssetUrls } from "@quasar/vite-plugin";
 import type { Plugin } from "rollup";
 
-function loadEsbuild(): Plugin {
+function copyWasm(): Plugin {
 	return {
-		name: "load-esbuild",
-		buildEnd() {
+		name: "copy-wasm",
+		generateBundle() {
 			fs.copyFileSync(
 				"./node_modules/esbuild-wasm/esbuild.wasm",
 				"./dist/esbuild.wasm"
+			);
+			fs.copyFileSync(
+				"./node_modules/vscode-oniguruma/release/onig.wasm",
+				"./dist/onig.wasm"
 			);
 		},
 	};
@@ -25,7 +29,7 @@ export default defineConfig({
 		}),
 		windiCss(),
 		quasar(),
-		loadEsbuild(),
+		copyWasm(),
 	],
 	build: {
 		target: "esnext",
