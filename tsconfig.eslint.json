@@ -3,6 +3,7 @@
 	"include": [
 		"src",
 		"scripts",
+		"typings",
 		".eslintrc.cjs",
 		"vite.config.ts",
 		"windi.config.ts"

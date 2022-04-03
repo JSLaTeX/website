@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
+
 import type * as monaco from "monaco-editor";
 import type {
 	IGrammar,
@@ -78,7 +80,7 @@ export class SimpleLanguageInfoProvider {
 
 			async loadGrammar(scopeName: ScopeName): Promise<IRawGrammar | null> {
 				const scopeNameInfo = grammars[scopeName];
-				if (scopeNameInfo == null) {
+				if (scopeNameInfo === null) {
 					return null;
 				}
 
@@ -118,7 +120,7 @@ export class SimpleLanguageInfoProvider {
 	 */
 	injectCSS() {
 		const cssColors = this.registry.getColorMap();
-		const colorMap = cssColors.map(Color.Format.CSS.parseHex);
+		const colorMap = cssColors.map((color) => Color.Format.CSS.parseHex(color));
 		// This is needed to ensure the minimap gets the right colors.
 		TokenizationRegistry.setColorMap(colorMap);
 		const css = generateTokensCSSForColorMap(colorMap);
@@ -138,7 +140,7 @@ export class SimpleLanguageInfoProvider {
 		language: string
 	): Promise<monaco.languages.EncodedTokensProvider | null> {
 		const scopeName = this.getScopeNameForLanguage(language);
-		if (scopeName == null) {
+		if (scopeName === null) {
 			return null;
 		}
 
@@ -164,7 +166,8 @@ export class SimpleLanguageInfoProvider {
 }
 
 class TokensProviderCache {
-	private readonly scopeNameToGrammar: Map<string, Promise<IGrammar>> = new Map();
+	private readonly scopeNameToGrammar: Map<string, Promise<IGrammar>> =
+		new Map();
 
 	constructor(private readonly registry: Registry) {}
 
@@ -193,9 +196,12 @@ class TokensProviderCache {
 		};
 	}
 
-	async getGrammar(scopeName: string, encodedLanguageId: number): Promise<IGrammar> {
+	async getGrammar(
+		scopeName: string,
+		encodedLanguageId: number
+	): Promise<IGrammar> {
 		const grammar = this.scopeNameToGrammar.get(scopeName);
-		if (grammar != null) {
+		if (grammar !== undefined) {
 			return grammar;
 		}
 
