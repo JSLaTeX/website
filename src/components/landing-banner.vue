@@ -6,8 +6,10 @@ import "@fontsource/inter/variable.css";
 
 <template>
 	<div class="bg-[#f7df1e] self-stretch column items-center">
-		<h1 class="font-extrabold text-6xl inter">JSLaTeX</h1>
-		<p class="inter">Supercharge your LaTeX with JavaScript!</p>
+		<div class="p-8">
+			<h1 class="text-center font-extrabold text-6xl inter">JSLaTeX</h1>
+			<p class="inter">Supercharge your LaTeX with JavaScript!</p>
+		</div>
 		<jslatex-demo />
 	</div>
 </template>
@@ -18,9 +20,9 @@ import "@fontsource/inter/variable.css";
 }
 
 @supports (font-variation-settings: normal) {
-  .inter {
-    font-family: "InterVariable";
-    font-variation-settings: "wght" 400 900;
-  }
+	.inter {
+		font-family: "InterVariable";
+		font-variation-settings: "wght" 400 900;
+	}
 }
 </style>

@@ -1,3 +1,10 @@
+import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import {
+	createOnigScanner,
+	createOnigString,
+	loadWASM,
+} from "vscode-oniguruma";
+import { outdent } from "outdent";
 import type { LanguageId } from "./register";
 import type { ScopeName, TextMateGrammar, ScopeNameInfo } from "./providers";
 
@@ -11,19 +18,14 @@ import type { ScopeName, TextMateGrammar, ScopeNameInfo } from "./providers";
 // import * as monaco from 'monaco-editor';
 //
 // because we are shipping only a subset of the languages.
-import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
-import {
-	createOnigScanner,
-	createOnigString,
-	loadWASM,
-} from "vscode-oniguruma";
 import { SimpleLanguageInfoProvider } from "./providers";
 import { registerLanguages } from "./register";
 import { rehydrateRegexps } from "./configuration";
 import VsCodeDarkTheme from "./vs-dark-plus-theme";
 import jsLatexTmLanguage from "./grammars/JSLaTeX.tmLanguage.json";
 import jsLatexConfiguration from "./configurations/jslatex.json";
-import { outdent } from "outdent";
+import latexTmLanguage from "./grammars/LaTeX.tmLanguage.json";
+import latexConfiguration from "./configurations/latex.json";
 
 interface DemoScopeNameInfo extends ScopeNameInfo {
 	path: string;
@@ -45,9 +47,14 @@ export async function loadMonacoEditor(element: HTMLElement) {
 			extensions: [".tex"],
 			aliases: ["JSLaTeX"],
 		},
+		{
+			id: "latex",
+			extensions: [".tex"],
+			aliases: ["LaTeX"],
+		},
 	];
 
-	const grammars: { [scopeName: string]: DemoScopeNameInfo } = {
+	const grammars: Record<string, DemoScopeNameInfo> = {
 		"text.tex.latex.jslatex": {
 			language: "latex",
 			path: "JSLaTeX.tmLanguage.json",
@@ -57,20 +64,40 @@ export async function loadMonacoEditor(element: HTMLElement) {
 	const fetchGrammar = async (
 		scopeName: ScopeName
 	): Promise<TextMateGrammar> => {
-		const grammar = jsLatexTmLanguage;
-		const type = "json";
-		return { type, grammar };
+		if (scopeName === "text.tex.latex") {
+			return {
+				grammar: JSON.stringify(latexTmLanguage),
+				type: "json",
+			};
+		} else if (scopeName === "text.tex.latex.jslatex") {
+			return {
+				grammar: JSON.stringify(jsLatexTmLanguage),
+				type: "json",
+			};
+		} else {
+			throw new Error(`Unknown scope: ${scopeName}`);
+		}
 	};
 
 	const fetchConfiguration = async (
 		language: LanguageId
 	): Promise<monaco.languages.LanguageConfiguration> => {
-		const rawConfiguration = jsLatexConfiguration;
+		let rawConfiguration: string;
+		if (language === "latex") {
+			rawConfiguration = JSON.stringify(latexConfiguration);
+		} else if (language === "jslatex") {
+			rawConfiguration = JSON.stringify(jsLatexConfiguration);
+		} else {
+			throw new Error(`Unknown langauge ID: ${language}`);
+		}
+
 		return rehydrateRegexps(rawConfiguration);
 	};
 
 	const data: ArrayBuffer | Response = await loadVSCodeOnigurumWASM();
-	loadWASM(data);
+
+	void loadWASM(data);
+
 	const onigLib = Promise.resolve({
 		createOnigScanner,
 		createOnigString,
@@ -85,25 +112,29 @@ export async function loadMonacoEditor(element: HTMLElement) {
 		onigLib,
 		monaco,
 	});
+
 	registerLanguages(
 		languages,
-		(language: LanguageId) => provider.fetchLanguageInfo(language),
+		async (language: LanguageId) => provider.fetchLanguageInfo(language),
 		monaco
 	);
 
 	const language = "jslatex";
 	const value = getSampleCodeForLanguage(language);
 
-	monaco.editor.create(element, {
+	const editor = monaco.editor.create(element, {
 		value,
 		language,
-		theme: "vs-dark",
+		theme: "vs-light",
+		lineNumbers: "off",
 		minimap: {
-			enabled: true,
+			enabled: false,
 		},
 	});
 
 	provider.injectCSS();
+
+	return editor;
 }
 
 // Taken from https://github.com/microsoft/vscode/blob/829230a5a83768a3494ebbc61144e7cde9105c73/src/vs/workbench/services/textMate/browser/textMateService.ts#L33-L40
@@ -124,7 +155,7 @@ async function loadVSCodeOnigurumWASM(): Promise<Response | ArrayBuffer> {
 
 function getSampleCodeForLanguage(language: LanguageId): string {
 	if (language === "jslatex") {
-		return outdent`
+		return outdent.string(String.raw`
 			\documentclass{article}
 
 			\begin{document}
@@ -149,7 +180,7 @@ function getSampleCodeForLanguage(language: LanguageId): string {
 							<?= total ?>
 						<? } else if (columnIndex === 3) { ?>
 							<?# Ramda.js is exposed in the top level for convenient utility functions! ?>
-							<?= R.sum(row) ?>
+							<?= R.sum(magicSquare[rowIndex]) ?>
 						<? } else if (rowIndex === 3) { ?>
 							<?= R.sum(magicSquare.map(row => row[columnIndex])) ?>
 						<? } else { ?>
@@ -160,8 +191,8 @@ function getSampleCodeForLanguage(language: LanguageId): string {
 				<? } ?>
 			\end{tabular}
 			\end{document}
-		`;
+		`);
 	}
 
-	throw Error(`unsupported language: ${language}`);
+	throw new Error(`unsupported language: ${language}`);
 }
