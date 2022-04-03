@@ -1,10 +1,13 @@
-import * as jsLatex from 'jslatex';
-import esbuildWasm from 'esbuild-wasm';
-import onetime from 'onetime';
+import * as jsLatex from "jslatex";
+import esbuildWasm from "esbuild-wasm";
+import onetime from "onetime";
 
 const getEsbuild = onetime(async () => {
 	await esbuildWasm.initialize({
-		wasmURL: './node_modules/esbuild-wasm/esbuild.wasm',
+		wasmURL:
+			import.meta.env.MODE === "development"
+				? "./node_modules/esbuild-wasm/esbuild.wasm"
+				: "./esbuild.wasm",
 	});
 	return esbuildWasm;
 });
