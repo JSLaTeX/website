@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import jslatexDemo from "./jslatex-demo.vue";
-import "@fontsource/inter";
-import "@fontsource/inter/variable.css";
+import jslatexDemo from './jslatex-demo.vue';
+import '@fontsource/inter';
+import '@fontsource/inter/variable.css';
 </script>
 
 <template>
@@ -16,13 +16,13 @@ import "@fontsource/inter/variable.css";
 
 <style scoped>
 .inter {
-	font-family: "Inter", sans-serif;
+	font-family: 'Inter', sans-serif;
 }
 
 @supports (font-variation-settings: normal) {
 	.inter {
-		font-family: "InterVariable";
-		font-variation-settings: "wght" 400 900;
+		font-family: 'InterVariable';
+		font-variation-settings: 'wght' 400 900;
 	}
 }
 </style>

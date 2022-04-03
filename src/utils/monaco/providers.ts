@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
 
-import type * as monaco from "monaco-editor";
+import type * as monaco from 'monaco-editor';
 import type {
 	IGrammar,
 	IRawGrammar,
 	IRawTheme,
 	IOnigLib,
 	StackElement,
-} from "vscode-textmate";
+} from 'vscode-textmate';
 
-import { INITIAL, Registry, parseRawGrammar } from "vscode-textmate";
-import { generateTokensCSSForColorMap } from "monaco-editor/esm/vs/editor/common/languages/supports/tokenization";
-import { TokenizationRegistry } from "monaco-editor/esm/vs/editor/common/languages";
-import { Color } from "monaco-editor/esm/vs/base/common/color";
-import type { LanguageId, LanguageInfo } from "./register";
+import { INITIAL, Registry, parseRawGrammar } from 'vscode-textmate';
+import { generateTokensCSSForColorMap } from 'monaco-editor/esm/vs/editor/common/languages/supports/tokenization';
+import { TokenizationRegistry } from 'monaco-editor/esm/vs/editor/common/languages';
+import { Color } from 'monaco-editor/esm/vs/base/common/color';
+import type { LanguageId, LanguageInfo } from './register';
 
 type Monaco = typeof monaco;
 
@@ -21,7 +21,7 @@ type Monaco = typeof monaco;
 export type ScopeName = string;
 
 export type TextMateGrammar = {
-	type: "json" | "plist";
+	type: 'json' | 'plist';
 	grammar: string;
 };
 
@@ -237,19 +237,19 @@ class TokensProviderCache {
 function createStyleElementForColorsCSS(): HTMLStyleElement {
 	// We want to ensure that our <style> element appears after Monaco's so that
 	// we can override some styles it inserted for the default theme.
-	const style = document.createElement("style");
+	const style = document.createElement('style');
 
 	// We expect the styles we need to override to be in an element with the class
 	// name 'monaco-colors' based on:
 	// https://github.com/microsoft/vscode/blob/f78d84606cd16d75549c82c68888de91d8bdec9f/src/vs/editor/standalone/browser/standaloneThemeServiceImpl.ts#L206-L214
-	const monacoColors = document.querySelectorAll(".monaco-colors")[0];
+	const monacoColors = document.querySelectorAll('.monaco-colors')[0];
 	if (monacoColors) {
 		monacoColors.parentElement?.insertBefore(style, monacoColors.nextSibling);
 	} else {
 		// Though if we cannot find it, just append to <head>.
 		let { head } = document;
 		if (head === null) {
-			head = document.querySelectorAll("head")[0];
+			head = document.querySelectorAll('head')[0];
 		}
 
 		head?.appendChild(style);

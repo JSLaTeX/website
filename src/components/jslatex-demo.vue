@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from "vue";
-import type * as monaco from "monaco-editor";
-import { useWindowSize } from "@vueuse/core";
-import { compileJsLatex } from "../utils/latex";
-import { createMonacoEditor } from "../utils/monaco/create";
+import { onMounted, ref, computed } from 'vue';
+import type * as monaco from 'monaco-editor';
+import { useWindowSize } from '@vueuse/core';
+import { compileJsLatex } from '../utils/latex';
+import { createMonacoEditor } from '../utils/monaco/create';
 
 const windowSize = useWindowSize();
 
@@ -40,13 +40,13 @@ onMounted(async () => {
 		await compileLatex();
 	});
 
-	window.addEventListener("resize", () => {
+	window.addEventListener('resize', () => {
 		editor?.layout();
 		display?.layout();
 	});
 });
 
-const latexCompileError = ref("");
+const latexCompileError = ref('');
 
 const isCompileLatexPdfLoading = ref(false);
 
@@ -60,7 +60,7 @@ async function compileLatexPdf() {
 
 	isCompileLatexPdfLoading.value = true;
 
-	latexOnlineIframe.value.addEventListener("load", () => {
+	latexOnlineIframe.value.addEventListener('load', () => {
 		isCompileLatexPdfLoading.value = false;
 	});
 
@@ -74,7 +74,7 @@ async function compileLatexPdf() {
 	<div class="column w-full">
 		<div class="row h-120">
 			<div ref="monacoEditorElement" class="flex-1"></div>
-			<div class='w-[2px] bg-black self-stretch'></div>
+			<div class="w-[2px] bg-black self-stretch"></div>
 			<div
 				ref="monacoDisplayElement"
 				class="flex-1 monaco-editor-wrapper--cursor-hidden"

@@ -1,1 +1,4 @@
-{"autoClosingPairs":[{"open":"<\\?","close":"\\?>"}],"folding":{"markers":{"start":"^<\\?","end":"^\\?>"}}}
+{
+	"autoClosingPairs": [{ "open": "<\\?", "close": "\\?>" }],
+	"folding": { "markers": { "start": "^<\\?", "end": "^\\?>" } }
+}

@@ -11,16 +11,12 @@
 		"isolatedModules": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"lib": [
-			"esnext",
-			"dom",
-			"es2021"
-		],
+		"lib": ["esnext", "dom", "es2021"],
 		"types": [
 			"./typings/env",
 			"./typings/monaco-color",
 			"./typings/monaco-languages",
-			"./typings/monaco-tokenization",
+			"./typings/monaco-tokenization"
 		]
 	}
 }

@@ -1,22 +1,22 @@
-import type * as monaco from "monaco-editor";
-import { getProperty, setProperty } from "dot-prop";
+import type * as monaco from 'monaco-editor';
+import { getProperty, setProperty } from 'dot-prop';
 
 /**
 	Fields that, if present in a LanguageConfiguration, must be a RegExp object rather than a string literal.
 */
 const REGEXP_PROPERTIES = [
 	// indentation
-	"indentationRules.decreaseIndentPattern",
-	"indentationRules.increaseIndentPattern",
-	"indentationRules.indentNextLinePattern",
-	"indentationRules.unIndentedLinePattern",
+	'indentationRules.decreaseIndentPattern',
+	'indentationRules.increaseIndentPattern',
+	'indentationRules.indentNextLinePattern',
+	'indentationRules.unIndentedLinePattern',
 
 	// code folding
-	"folding.markers.start",
-	"folding.markers.end",
+	'folding.markers.start',
+	'folding.markers.end',
 
 	// language's "word definition"
-	"wordPattern",
+	'wordPattern',
 ];
 
 /**
@@ -29,7 +29,7 @@ export function rehydrateRegexps(
 	for (const property of REGEXP_PROPERTIES) {
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 		const value = getProperty(out, property) as unknown;
-		if (typeof value === "string") {
+		if (typeof value === 'string') {
 			setProperty(out, property, new RegExp(value));
 		}
 	}

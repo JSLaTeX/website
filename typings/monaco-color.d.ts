@@ -1,1 +1,1 @@
-declare module "monaco-editor/esm/vs/base/common/color";
+declare module 'monaco-editor/esm/vs/base/common/color';

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import LandingBanner from "./components/landing-banner.vue";
-import FeaturesSection from "./components/features-section.vue";
+import LandingBanner from './components/landing-banner.vue';
+import FeaturesSection from './components/features-section.vue';
 </script>
 
 <template>
