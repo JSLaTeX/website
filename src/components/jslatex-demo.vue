@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { compileJsLatex } from "jslatex";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import esbuildWasm from "esbuild-wasm";
 import onetime from "onetime";
 import ky from "ky";
 import { outdent } from "outdent";
+import { loadMonacoEditor } from "../utils/monaco/app.js";
+
+const monacoEditorElement = ref<HTMLElement>();
+
+onMounted(() => {
+	loadMonacoEditor(monacoEditorElement.value);
+});
 
 const getEsbuild = onetime(async () => {
 	await esbuildWasm.initialize({
@@ -91,12 +98,7 @@ async function compileLatexPdf(latex: string) {
 <template>
 	<div class="column w-full">
 		<div class="row h-60">
-			<textarea
-				class="border-2 flex-1"
-				v-model="latexTextareaContent"
-				@change="compileLatex(latexTextareaContent)"
-			>
-			</textarea>
+			<div ref="monacoEditorElement" class="border-2 flex-1"></div>
 
 			<div class="flex-1">
 				{{ compiledLatex }}

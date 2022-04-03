@@ -1,6 +1,8 @@
 {
 	"extends": "./tsconfig.json",
 	"include": [
+		"src",
+		"scripts",
 		".eslintrc.cjs",
 		"vite.config.ts",
 		"windi.config.ts"

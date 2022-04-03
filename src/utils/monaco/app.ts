@@ -29,7 +29,7 @@ interface DemoScopeNameInfo extends ScopeNameInfo {
 	path: string;
 }
 
-export async function loadMonacoEditor() {
+export async function loadMonacoEditor(element: HTMLElement) {
 	// Adding a new TextMate grammar entails the following:
 	// - adding an entry in the languages array
 	// - adding an entry in the grammars map
@@ -91,12 +91,8 @@ export async function loadMonacoEditor() {
 		monaco
 	);
 
+	const language = "jslatex";
 	const value = getSampleCodeForLanguage(language);
-	const id = "container";
-	const element = document.getElementById(id);
-	if (element == null) {
-		throw Error(`could not find element #${id}`);
-	}
 
 	monaco.editor.create(element, {
 		value,
@@ -106,6 +102,7 @@ export async function loadMonacoEditor() {
 			enabled: true,
 		},
 	});
+
 	provider.injectCSS();
 }
 
