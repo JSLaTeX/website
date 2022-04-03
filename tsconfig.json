@@ -10,20 +10,17 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"esModuleInterop": true,
+		"skipLibCheck": true,
 		"lib": [
 			"esnext",
 			"dom",
 			"es2021"
 		],
-		"typeRoots": [
-			"node_modules/@types",
-			"typings"
+		"types": [
+			"./typings/env",
+			"./typings/monaco-color",
+			"./typings/monaco-languages",
+			"./typings/monaco-tokenization",
 		]
-	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.d.ts",
-		"src/**/*.tsx",
-		"src/**/*.vue"
-	]
+	}
 }

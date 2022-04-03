@@ -9,7 +9,8 @@
 		"build": "vue-tsc --noEmit && vite build",
 		"lint": "eslint --cache --fix .",
 		"prettier": "prettier --write .",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"tc": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@fontsource/inter": "^4.5.7",
