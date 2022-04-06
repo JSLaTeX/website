@@ -72,7 +72,7 @@ async function compileLatexPdf() {
 
 <template>
 	<div class="column w-full">
-		<div class="row h-120">
+		<div class="row h-120 px-8">
 			<div ref="monacoEditorElement" class="flex-1"></div>
 			<div class="w-[2px] bg-black self-stretch"></div>
 			<div
@@ -114,7 +114,7 @@ async function compileLatexPdf() {
 	<iframe
 		v-show="hasCompiledLatexPdfBeenCalled"
 		ref="latexOnlineIframe"
-		class="border-2 border-black rounded-md"
+		class="border-2 border-black rounded-md mb-8"
 		:width="windowWidth * 0.8"
 		:height="windowHeight * 0.8"
 	></iframe>
