@@ -29,6 +29,7 @@ export default defineConfig({
 			entries: [{ find: /^(.*)\.js$/, replacement: '$1' }],
 		}),
 		vue({
+			reactivityTransform: true,
 			template: { transformAssetUrls },
 		}),
 		windiCss(),

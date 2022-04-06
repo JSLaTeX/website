@@ -16,7 +16,7 @@ type Feature = {
 
 const features: Feature[] = [
 	{
-		name: 'Just JavaScript',
+		name: 'Plain JavaScript',
 		description:
 			"In JSLaTeX, you're writing plain JavaScript; no need to learn specialized syntax that you won't be using anywhere else.",
 		icon: mdiLanguageJavascript,

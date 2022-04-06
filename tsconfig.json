@@ -13,6 +13,8 @@
 		"skipLibCheck": true,
 		"lib": ["esnext", "dom", "es2021"],
 		"types": [
+			"vite/client",
+			"vue/ref-macros",
 			"./typings/env",
 			"./typings/monaco-color",
 			"./typings/monaco-languages",
