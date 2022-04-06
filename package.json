@@ -14,6 +14,7 @@
 	},
 	"dependencies": {
 		"@fontsource/inter": "^4.5.7",
+		"@mdi/js": "^6.6.96",
 		"@vueuse/core": "^8.2.3",
 		"dot-prop": "^7.2.0",
 		"esbuild-wasm": "^0.14.30",
@@ -22,6 +23,7 @@
 		"onetime": "^6.0.0",
 		"outdent": "^0.8.0",
 		"quasar": "^2.6.5",
+		"simple-vue-icon": "^1.1.13",
 		"vscode-oniguruma": "^1.6.2",
 		"vscode-textmate": "^6.0.0",
 		"vue": "^3.2.31",

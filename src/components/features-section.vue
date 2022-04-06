@@ -1,5 +1,74 @@
+<script setup lang="ts">
+import {
+	mdiWrench,
+	mdiLanguageJavascript,
+	mdiPuzzle,
+	mdiSpeedometer,
+	mdiHeart,
+	mdiWeb,
+} from '@mdi/js';
+
+type Feature = {
+	name: string;
+	description: string;
+	icon: string;
+};
+
+const features: Feature[] = [
+	{
+		name: 'Just JavaScript',
+		description:
+			"In JSLaTeX, you're writing plain JavaScript; no need to learn specialized syntax that you won't be using anywhere else.",
+		icon: mdiLanguageJavascript,
+	},
+	{
+		name: 'Compatibility',
+		description:
+			'By compiling to plain LaTeX, JSLaTeX is compatible with existing LaTeX tools, like TeXcount and pdflatex.',
+		icon: mdiPuzzle,
+	},
+	{
+		name: 'Speed',
+		description:
+			'JSLaTeX is <em>fast</em>, allowing you to easily debug and iterate on your code.',
+		icon: mdiSpeedometer,
+	},
+	{
+		name: 'Tooling',
+		description:
+			'JSLaTeX comes with a custom VSCode extension that supports syntax highlighting.',
+		icon: mdiWrench,
+	},
+	{
+		name: 'Ecosystem',
+		description:
+			'Through JavaScript, JSLaTeX unlocks access to the its massive ecosystem, including 1,000,000+ npm packages!',
+		icon: mdiWeb,
+	},
+	{
+		name: 'Open Source',
+		description:
+			'JSLaTeX is <a href="https://github.com/JSLaTeX">100% open source</a>, actively maintained and accepting contributions from the community!',
+		icon: mdiHeart,
+	},
+];
+</script>
+
 <template>
 	<div class="column items-center m-4">
-		<h1 class="text-bold text-4xl">Features</h1>
+		<h1 class="text-bold text-5xl">Features</h1>
+		<div class="grid grid-cols-3 grid-rows-2 gap-4 py-8">
+			<div
+				v-for="feature of features"
+				:key="feature.name"
+				class="column items-center"
+			>
+				<v-icon :icon="feature.icon" size="40" />
+				<!-- eslint-disable-next-line vue/no-v-html -->
+				<h2 class="text-center font-bold text-xl" v-html="feature.name"></h2>
+				<!-- eslint-disable-next-line vue/no-v-html -->
+				<p class="text-center" v-html="feature.description"></p>
+			</div>
+		</div>
 	</div>
 </template>

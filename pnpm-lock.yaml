@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@fontsource/inter': ^4.5.7
   '@leonzalion/configs': ^1.2.3
+  '@mdi/js': ^6.6.96
   '@quasar/vite-plugin': ^1.0.9
   '@vitejs/plugin-vue': ^2.3.1
   '@vueuse/core': ^8.2.3
@@ -18,6 +19,7 @@ specifiers:
   quasar: ^2.6.5
   rollup: ^2.70.1
   sass: 1.32.0
+  simple-vue-icon: ^1.1.13
   typescript: ^4.6.3
   vite: ^2.9.1
   vite-plugin-windicss: ^1.8.3
@@ -29,6 +31,7 @@ specifiers:
 
 dependencies:
   '@fontsource/inter': 4.5.7
+  '@mdi/js': 6.6.96
   '@vueuse/core': 8.2.3_vue@3.2.31
   dot-prop: 7.2.0
   esbuild-wasm: 0.14.30
@@ -37,6 +40,7 @@ dependencies:
   onetime: 6.0.0
   outdent: 0.8.0
   quasar: 2.6.5
+  simple-vue-icon: 1.1.13_vue@3.2.31
   vscode-oniguruma: 1.6.2
   vscode-textmate: 6.0.0
   vue: 3.2.31
@@ -343,6 +347,10 @@ packages:
       - supports-color
       - typescript
     dev: true
+
+  /@mdi/js/6.6.96:
+    resolution: {integrity: sha512-ke9PN5DjPCOlMfhioxeZYADz8Yiz6v47W0IYRza01SSJD7y1EwESVpwFnnFUso+eCoWtE1CO9cTIvQF6sEreuA==}
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -4874,6 +4882,14 @@ packages:
   /signal-exit/3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
     dev: true
+
+  /simple-vue-icon/1.1.13_vue@3.2.31:
+    resolution: {integrity: sha512-3q0hAazh49ojMK/FeE7vX/XkAdlb5Ir/Qc4cCocd/nwMkydwETI0CAGONUfU5WiayqjwP+B+yWhOGX5auyLSIA==}
+    peerDependencies:
+      vue: ^3
+    dependencies:
+      vue: 3.2.31
+    dev: false
 
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
