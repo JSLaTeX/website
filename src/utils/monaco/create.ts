@@ -8,26 +8,26 @@
 // import * as monaco from 'monaco-editor';
 //
 // because we are shipping only a subset of the languages.
-import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
 import {
 	createOnigScanner,
 	createOnigString,
 	loadWASM,
-} from "vscode-oniguruma";
-import { outdent } from "outdent";
-import { compileJsLatex } from "../latex.js";
-import type { LanguageId } from "./register";
-import type { ScopeName, TextMateGrammar, ScopeNameInfo } from "./providers";
+} from 'vscode-oniguruma';
+import { outdent } from 'outdent';
+import { compileJsLatex } from '../latex.js';
+import type { LanguageId } from './register';
+import type { ScopeName, TextMateGrammar, ScopeNameInfo } from './providers';
 
-import { SimpleLanguageInfoProvider } from "./providers.js";
-import { registerLanguages } from "./register.js";
-import { rehydrateRegexps } from "./configuration.js";
-import VsCodeDarkTheme from "./vs-dark-plus-theme.js";
-import jsLatexTmLanguage from "./grammars/JSLaTeX.tmLanguage.json";
-import jsLatexConfiguration from "./configurations/jslatex.json";
-import latexTmLanguage from "./grammars/LaTeX.tmLanguage.json";
-import typescriptTmLanguage from "./grammars/TypeScript.tmLangauge.json";
-import texTmLanguage from "./grammars/TeX.tmLanguage.json";
+import { SimpleLanguageInfoProvider } from './providers.js';
+import { registerLanguages } from './register.js';
+import { rehydrateRegexps } from './configuration.js';
+import jsLatexTmLanguage from './grammars/JSLaTeX.tmLanguage.json';
+import jsLatexConfiguration from './configurations/jslatex.json';
+import latexTmLanguage from './grammars/LaTeX.tmLanguage.json';
+import typescriptTmLanguage from './grammars/TypeScript.tmLangauge.json';
+import texTmLanguage from './grammars/TeX.tmLanguage.json';
+import atomOneLightTheme from './atom-one-light-theme.js';
 
 interface DemoScopeNameInfo extends ScopeNameInfo {
 	path: string;
@@ -47,28 +47,28 @@ export async function createMonacoEditor(
 	// - making the monaco.languages.LanguageConfiguration available in the
 	//   configurations/ folder.
 	const languages: monaco.languages.ILanguageExtensionPoint[] = [
-		{ id: "jslatex" },
-		{ id: "latex" },
-		{ id: "tex" },
-		{ id: "typescript" },
+		{ id: 'jslatex' },
+		{ id: 'latex' },
+		{ id: 'tex' },
+		{ id: 'typescript' },
 	];
 
 	const grammars: Record<string, DemoScopeNameInfo> = {
-		"text.tex.latex.jslatex": {
-			language: "jslatex",
-			path: "JSLaTeX.tmLanguage.json",
+		'text.tex.latex.jslatex': {
+			language: 'jslatex',
+			path: 'JSLaTeX.tmLanguage.json',
 		},
-		"text.tex.latex": {
-			language: "latex",
-			path: "LaTeX.tmLanguage.json",
+		'text.tex.latex': {
+			language: 'latex',
+			path: 'LaTeX.tmLanguage.json',
 		},
-		"text.tex": {
-			language: "tex",
-			path: "TeX.tmLanguage.json",
+		'text.tex': {
+			language: 'tex',
+			path: 'TeX.tmLanguage.json',
 		},
-		"source.ts": {
-			language: "typescript",
-			path: "TypeScript.tmLanguage.json",
+		'source.ts': {
+			language: 'typescript',
+			path: 'TypeScript.tmLanguage.json',
 		},
 	};
 
@@ -76,30 +76,30 @@ export async function createMonacoEditor(
 		scopeName: ScopeName
 	): Promise<TextMateGrammar> => {
 		switch (scopeName) {
-			case "text.tex.latex":
+			case 'text.tex.latex':
 				return {
 					grammar: JSON.stringify(latexTmLanguage),
-					type: "json",
+					type: 'json',
 				};
-			case "text.tex.latex.jslatex":
+			case 'text.tex.latex.jslatex':
 				return {
 					grammar: JSON.stringify(jsLatexTmLanguage),
-					type: "json",
+					type: 'json',
 				};
-			case "source.ts":
+			case 'source.ts':
 				return {
 					grammar: JSON.stringify(typescriptTmLanguage),
-					type: "json",
+					type: 'json',
 				};
-			case "text.tex":
+			case 'text.tex':
 				return {
 					grammar: JSON.stringify(texTmLanguage),
-					type: "json",
+					type: 'json',
 				};
 			default:
 				return {
-					type: "json",
-					grammar: "{}",
+					type: 'json',
+					grammar: '{}',
 				};
 		}
 	};
@@ -108,7 +108,7 @@ export async function createMonacoEditor(
 		language: LanguageId
 	): Promise<monaco.languages.LanguageConfiguration> => {
 		let rawConfiguration: string;
-		if (language === "jslatex") {
+		if (language === 'jslatex') {
 			rawConfiguration = JSON.stringify(jsLatexConfiguration);
 		} else {
 			throw new Error(`Unknown langauge ID: ${language}`);
@@ -131,7 +131,7 @@ export async function createMonacoEditor(
 		fetchGrammar,
 		configurations: languages.map((language) => language.id),
 		fetchConfiguration,
-		theme: VsCodeDarkTheme,
+		theme: atomOneLightTheme,
 		onigLib,
 		monaco,
 	});
@@ -142,15 +142,15 @@ export async function createMonacoEditor(
 		monaco
 	);
 
-	const language = "jslatex";
+	const language = 'jslatex';
 	const sampleCode = getSampleCodeForLanguage(language);
 	const value = readonly ? await compileJsLatex(sampleCode) : sampleCode;
 
 	const editor = monaco.editor.create(element, {
 		value,
 		language,
-		theme: "vs-light",
-		lineNumbers: "off",
+		theme: 'vs-light',
+		lineNumbers: 'off',
 		readOnly: readonly,
 		minimap: {
 			enabled: false,
@@ -166,11 +166,11 @@ export async function createMonacoEditor(
 async function loadVSCodeOnigurumWASM(): Promise<Response | ArrayBuffer> {
 	const response = await fetch(
 		import.meta.env.PROD
-			? "onig.wasm"
-			: "/node_modules/vscode-oniguruma/release/onig.wasm"
+			? 'onig.wasm'
+			: '/node_modules/vscode-oniguruma/release/onig.wasm'
 	);
-	const contentType = response.headers.get("content-type");
-	if (contentType === "application/wasm") {
+	const contentType = response.headers.get('content-type');
+	if (contentType === 'application/wasm') {
 		return response;
 	}
 
@@ -181,12 +181,13 @@ async function loadVSCodeOnigurumWASM(): Promise<Response | ArrayBuffer> {
 }
 
 function getSampleCodeForLanguage(language: LanguageId): string {
-	if (language === "jslatex") {
+	if (language === 'jslatex') {
 		return outdent.string(String.raw`
 			\documentclass{article}
 
 			\begin{document}
 			<?
+				// Try changing the following variable!
 				const magicSquare = [
 					[2, 7, 6],
 					[9, 5, 1],
