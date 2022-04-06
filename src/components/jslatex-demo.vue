@@ -2,8 +2,8 @@
 import { onMounted, ref, computed } from 'vue';
 import type * as monaco from 'monaco-editor';
 import { useWindowSize } from '@vueuse/core';
-import { compileJsLatex } from '../utils/latex';
-import { createMonacoEditor } from '../utils/monaco/create';
+import { compileJsLatex } from '../utils/latex.js';
+import { createMonacoEditor } from '../utils/monaco/create.js';
 
 const windowSize = useWindowSize();
 

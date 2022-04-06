@@ -10,10 +10,10 @@ import type {
 } from 'vscode-textmate';
 
 import { INITIAL, Registry, parseRawGrammar } from 'vscode-textmate';
-import { generateTokensCSSForColorMap } from 'monaco-editor/esm/vs/editor/common/languages/supports/tokenization';
-import { TokenizationRegistry } from 'monaco-editor/esm/vs/editor/common/languages';
-import { Color } from 'monaco-editor/esm/vs/base/common/color';
-import type { LanguageId, LanguageInfo } from './register';
+import { generateTokensCSSForColorMap } from 'monaco-editor/esm/vs/editor/common/languages/supports/tokenization.js';
+import { TokenizationRegistry } from 'monaco-editor/esm/vs/editor/common/languages.js';
+import { Color } from 'monaco-editor/esm/vs/base/common/color.js';
+import type { LanguageId, LanguageInfo } from './register.js';
 
 type Monaco = typeof monaco;
 

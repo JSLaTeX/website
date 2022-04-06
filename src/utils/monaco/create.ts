@@ -8,21 +8,21 @@
 // import * as monaco from 'monaco-editor';
 //
 // because we are shipping only a subset of the languages.
-import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
 import {
 	createOnigScanner,
 	createOnigString,
 	loadWASM,
 } from "vscode-oniguruma";
 import { outdent } from "outdent";
-import { compileJsLatex } from "../latex";
+import { compileJsLatex } from "../latex.js";
 import type { LanguageId } from "./register";
 import type { ScopeName, TextMateGrammar, ScopeNameInfo } from "./providers";
 
-import { SimpleLanguageInfoProvider } from "./providers";
-import { registerLanguages } from "./register";
-import { rehydrateRegexps } from "./configuration";
-import VsCodeDarkTheme from "./vs-dark-plus-theme";
+import { SimpleLanguageInfoProvider } from "./providers.js";
+import { registerLanguages } from "./register.js";
+import { rehydrateRegexps } from "./configuration.js";
+import VsCodeDarkTheme from "./vs-dark-plus-theme.js";
 import jsLatexTmLanguage from "./grammars/JSLaTeX.tmLanguage.json";
 import jsLatexConfiguration from "./configurations/jslatex.json";
 import latexTmLanguage from "./grammars/LaTeX.tmLanguage.json";
