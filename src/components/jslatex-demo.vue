@@ -95,7 +95,10 @@ mixin embedJavaScriptInLatex
 		div(class="font-bold text-center text-xl")
 			| Embed JavaScript in LaTeX...
 		div(class="text-sm text-center")
-			| Edit the code below to change the compiled output on the right!
+			| Edit the code below to change the compiled output !{' '}
+			span(v-if='$q.screen.lt.md') below!
+			span(v-else) on the right!
+
 
 mixin getRegularLatexOut
 	div(class="column m-2")
