@@ -33,15 +33,17 @@ export default defineConfig({
 	},
 	plugins: [
 		alias({
-			entries: [{ find: /^(.*)\.js$/, replacement: '$1' }],
+			entries: [
+				{
+					find: /^([.~].*)\.js$/,
+					replacement: '$1',
+				},
+			],
 		}),
 		vue({
 			reactivityTransform: true,
 			template: {
 				transformAssetUrls,
-				compilerOptions: {
-					isCustomElement: (tag) => tag.startsWith('custom-'),
-				},
 			},
 		}),
 		windiCss(),
