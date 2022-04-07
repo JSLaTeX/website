@@ -23,7 +23,8 @@
 			"./typings/env",
 			"./typings/monaco-color",
 			"./typings/monaco-languages",
-			"./typings/monaco-tokenization"
+			"./typings/monaco-tokenization",
+			"./typings/windicss-animations"
 		]
 	}
 }
