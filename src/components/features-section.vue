@@ -48,7 +48,7 @@ const features: Feature[] = [
 	{
 		name: 'Open Source',
 		description:
-			'JSLaTeX is <a href="https://github.com/JSLaTeX">100% open source</a>, actively maintained and accepting contributions from the community!',
+			'JSLaTeX is <a href="https://github.com/JSLaTeX">open source</a>, MIT-licensed, actively maintained, and accepting contributions from the community!',
 		icon: mdiHeart,
 	},
 ];

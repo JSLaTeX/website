@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, watch } from 'vue';
+import { nextTick, onMounted, watch } from 'vue';
 import type * as monaco from 'monaco-editor';
 import { useWindowSize } from '@vueuse/core';
 import { compileJsLatex } from '../utils/latex.js';
@@ -59,7 +59,7 @@ onMounted(async () => {
 		await compileLatex();
 	});
 
-	window.addEventListener('resize', () => {
+	window.addEventListener('resize', async () => {
 		editor?.layout();
 		display?.layout();
 	});
@@ -151,9 +151,8 @@ div(class="column w-full")
 				q-spinner(size="2em")
 
 		span(class="text-xs text-gray-600")
-			| Powered by
+			| Powered by !{' '}
 			a(
-				target="_blank"
 				class="text-blue-400 underline hover:text-blue-500"
 				href="https://github.com/aslushnikov/latex-online"
 			) LatexOnline

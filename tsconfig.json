@@ -11,11 +11,20 @@
 		"isolatedModules": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"lib": ["esnext", "dom", "es2021"],
+		"lib": [
+			"esnext",
+			"dom",
+			"dom.iterable",
+			"es2021"
+		],
 		"noUnusedLocals": true,
 		"paths": {
-			"~/*": ["./src/*"],
-			"~root/*": ["./*"]
+			"~/*": [
+				"./src/*"
+			],
+			"~root/*": [
+				"./*"
+			]
 		},
 		"types": [
 			"vite/client",

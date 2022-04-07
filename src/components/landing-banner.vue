@@ -5,7 +5,7 @@ import '@fontsource/inter/variable.css';
 </script>
 
 <template>
-	<div class="bg-[#f7df1e] self-stretch column items-center">
+	<div class="bg-js self-stretch column items-center">
 		<div class="p-8">
 			<h1 class="text-center font-extrabold text-6xl inter">JSLaTeX</h1>
 			<p class="inter">Supercharge your LaTeX with JavaScript!</p>
