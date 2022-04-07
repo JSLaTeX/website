@@ -12,6 +12,15 @@
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"lib": ["esnext", "dom", "es2021"],
+		"noUnusedLocals": true,
+		"paths": {
+			"~/*": [
+				"./src/*"
+			],
+			"~root/*": [
+				"./*"
+			]
+		},
 		"types": [
 			"vite/client",
 			"vue/ref-macros",

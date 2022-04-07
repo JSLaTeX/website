@@ -7,4 +7,9 @@ module.exports = defineConfig({
 		project: path.resolve(__dirname, 'tsconfig.eslint.json'),
 		extraFileExtensions: ['.vue'],
 	},
+	rules: {
+		'vue/no-v-html': 'off',
+		// See https://github.com/johnsoncodehk/volar/issues/604
+		'@typescript-eslint/no-unused-vars': 'off',
+	},
 });

@@ -24,7 +24,7 @@ const features: Feature[] = [
 	{
 		name: 'Compatibility',
 		description:
-			'By compiling to plain LaTeX, JSLaTeX is compatible with existing LaTeX tools, like TeXcount and pdflatex.',
+			'By compiling to plain LaTeX, JSLaTeX is compatible with existing LaTeX tools, like <a href="https://app.uio.no/ifi/texcount/">TeXcount</a> and <a href="http://www.luatex.org">LuaTeX</a>.',
 		icon: mdiPuzzle,
 	},
 	{
@@ -36,13 +36,13 @@ const features: Feature[] = [
 	{
 		name: 'Tooling',
 		description:
-			'JSLaTeX comes with a custom VSCode extension that supports syntax highlighting.',
+			'JSLaTeX comes with a <a href="https://marketplace.visualstudio.com/items?itemName=leonzalion.jslatex">custom VSCode extension</a> that supports syntax highlighting.',
 		icon: mdiWrench,
 	},
 	{
 		name: 'Ecosystem',
 		description:
-			'Through JavaScript, JSLaTeX unlocks access to the its massive ecosystem, including 1,000,000+ npm packages!',
+			'Through JavaScript, JSLaTeX unlocks access to the its massive ecosystem, including <a href="https://www.npmjs.com">1,000,000+ npm packages!</a>',
 		icon: mdiWeb,
 	},
 	{
@@ -64,11 +64,18 @@ const features: Feature[] = [
 				class="column items-center"
 			>
 				<v-icon :icon="feature.icon" size="40" />
-				<!-- eslint-disable-next-line vue/no-v-html -->
 				<h2 class="text-center font-bold text-xl" v-html="feature.name"></h2>
-				<!-- eslint-disable-next-line vue/no-v-html -->
-				<p class="text-center" v-html="feature.description"></p>
+				<p
+					class="text-center feature-description"
+					v-html="feature.description"
+				></p>
 			</div>
 		</div>
 	</div>
 </template>
+
+<style scoped lang="postcss">
+.feature-description ::v-deep(a) {
+	@apply hover:text-blue-500 text-blue-400 underline;
+}
+</style>

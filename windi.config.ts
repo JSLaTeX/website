@@ -1,4 +1,7 @@
+/* eslint-disable import/extensions, node/file-extension-in-import */
+
 import { defineConfig } from 'windicss/helpers';
+import typography from 'windicss/plugin/typography';
 
 export default defineConfig({
 	shortcuts: {
@@ -7,4 +10,5 @@ export default defineConfig({
 		'absolute-center':
 			'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
 	},
+	plugins: [typography()],
 });
