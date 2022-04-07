@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onMounted, watch } from 'vue';
+import { onMounted, watch } from 'vue';
 import type * as monaco from 'monaco-editor';
 import { useWindowSize } from '@vueuse/core';
 import { compileJsLatex } from '../utils/latex.js';
