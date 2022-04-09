@@ -4,8 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import windiCss from 'vite-plugin-windicss';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 import type { Plugin } from 'rollup';
-import alias from '@rollup/plugin-alias';
-import { join, dirname } from 'desm';
+import { join } from 'desm';
 
 function copyWasm(): Plugin {
 	return {
