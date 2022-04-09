@@ -23,23 +23,22 @@ function copyWasm(): Plugin {
 	};
 }
 
-// https://vitejs.dev/config/
 export default defineConfig({
 	resolve: {
-		alias: {
-			'~': join(import.meta.url, 'src'),
-			'~root': dirname(import.meta.url),
-		},
+		alias: [
+			{
+				find: '~',
+				replacement: join(import.meta.url, 'src'),
+				customResolver(source) {
+					return {
+						external: true,
+						id: source.replace(/\.js$/, ''),
+					};
+				},
+			},
+		],
 	},
 	plugins: [
-		alias({
-			entries: [
-				{
-					find: /^([.~].*)\.js$/,
-					replacement: '$1',
-				},
-			],
-		}),
 		vue({
 			reactivityTransform: true,
 			template: {
