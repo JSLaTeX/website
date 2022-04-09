@@ -4,8 +4,8 @@ import vue from '@vitejs/plugin-vue';
 import windiCss from 'vite-plugin-windicss';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 import type { Plugin } from 'rollup';
-import alias from '@rollup/plugin-alias';
-import { join, dirname } from 'desm';
+import { join } from 'desm';
+import jsImports from 'vite-plugin-js-imports';
 
 function copyWasm(): Plugin {
 	return {
@@ -23,23 +23,13 @@ function copyWasm(): Plugin {
 	};
 }
 
-// https://vitejs.dev/config/
 export default defineConfig({
 	resolve: {
 		alias: {
-			'~': join(import.meta.url, 'src'),
-			'~root': dirname(import.meta.url),
+			'~': join(import.meta.url, 'src')
 		},
 	},
 	plugins: [
-		alias({
-			entries: [
-				{
-					find: /^([.~].*)\.js$/,
-					replacement: '$1',
-				},
-			],
-		}),
 		vue({
 			reactivityTransform: true,
 			template: {
@@ -49,6 +39,7 @@ export default defineConfig({
 		windiCss(),
 		quasar(),
 		copyWasm(),
+		jsImports()
 	],
 	build: {
 		target: 'esnext',

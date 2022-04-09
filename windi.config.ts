@@ -2,6 +2,7 @@
 
 import { defineConfig } from 'windicss/helpers';
 import typography from 'windicss/plugin/typography';
+import animations from '@windicss/plugin-animations';
 
 export default defineConfig({
 	shortcuts: {
@@ -17,5 +18,5 @@ export default defineConfig({
 			},
 		},
 	},
-	plugins: [typography()],
+	plugins: [typography(), animations()],
 });
