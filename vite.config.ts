@@ -42,9 +42,6 @@ export default defineConfig({
 		jsImports()
 	],
 	build: {
-		target: 'esnext',
-		rollupOptions: {
-			external: [/node:.*/],
-		},
+		target: 'es2022'
 	},
 });

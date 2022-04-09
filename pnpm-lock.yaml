@@ -25,7 +25,7 @@ specifiers:
   simple-vue-icon: ^1.1.13
   typescript: ^4.6.3
   vite: ^2.9.1
-  vite-plugin-js-imports: ^1.0.0
+  vite-plugin-js-imports: ^1.0.1
   vite-plugin-windicss: ^1.8.3
   vscode-oniguruma: ^1.6.2
   vscode-textmate: ^6.0.0
@@ -64,7 +64,7 @@ devDependencies:
   sass: 1.32.0
   typescript: 4.6.3
   vite: 2.9.1_sass@1.32.0
-  vite-plugin-js-imports: 1.0.0
+  vite-plugin-js-imports: 1.0.1
   vite-plugin-windicss: 1.8.3_vite@2.9.1
   vue-tsc: 0.33.9_typescript@4.6.3
 
@@ -5712,8 +5712,8 @@ packages:
       builtins: 1.0.3
     dev: true
 
-  /vite-plugin-js-imports/1.0.0:
-    resolution: {integrity: sha512-ZFgrsnrPl2rqdQEmKee48p5MZCE2yeRajsaxQ2HXmCjqv35EOMfzZEypi37S9TTcAV3URYlg5d7CJWB4Ua/jPg==}
+  /vite-plugin-js-imports/1.0.1:
+    resolution: {integrity: sha512-JZD77Hvnwb0dj9PG6Q9/7YpS1XYalhKCC10a6zhr8aamiibGUSpUc96ysSNwDysvixo05BjASL1L04MVJLCC1w==}
     dev: true
 
   /vite-plugin-windicss/1.8.3_vite@2.9.1:
