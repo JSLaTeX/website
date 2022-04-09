@@ -5,6 +5,7 @@ import windiCss from 'vite-plugin-windicss';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 import type { Plugin } from 'rollup';
 import { join } from 'desm';
+import jsImports from 'vite-plugin-js-imports';
 
 function copyWasm(): Plugin {
 	return {
@@ -24,18 +25,9 @@ function copyWasm(): Plugin {
 
 export default defineConfig({
 	resolve: {
-		alias: [
-			{
-				find: '~',
-				replacement: join(import.meta.url, 'src'),
-				customResolver(source) {
-					return {
-						external: true,
-						id: source.replace(/\.js$/, ''),
-					};
-				},
-			},
-		],
+		alias: {
+			'~': join(import.meta.url, 'src')
+		},
 	},
 	plugins: [
 		vue({
@@ -47,6 +39,7 @@ export default defineConfig({
 		windiCss(),
 		quasar(),
 		copyWasm(),
+		jsImports()
 	],
 	build: {
 		target: 'esnext',
