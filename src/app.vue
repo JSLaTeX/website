@@ -15,10 +15,12 @@ onMounted(() => {
 </script>
 
 <template>
-	<div class="column">
+	<div class="column items-center gap-8">
 		<landing-banner />
-		<features-section />
-		<get-started-section />
-		<footer-section />
+		<div class="column gap-8 max-w-6xl">
+			<features-section />
+			<get-started-section />
+		</div>
+		<footer-section class="self-stretch" />
 	</div>
 </template>

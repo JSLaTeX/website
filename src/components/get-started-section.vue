@@ -47,7 +47,7 @@ const myFileTex = outdent`
 </script>
 
 <template>
-	<div ref="getStartedElement" class="tab-2">
+	<div ref="getStartedElement" class="tab-2 px-8">
 		<h1 class="font-bold text-5xl text-center">Get Started</h1>
 		<div class="markdown-body m-8">
 			<h2>Installation</h2>

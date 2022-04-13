@@ -55,9 +55,9 @@ const features: Feature[] = [
 </script>
 
 <template>
-	<div class="column items-center m-4">
+	<div class="column items-center px-8">
 		<h1 class="text-bold text-5xl">Features</h1>
-		<div class="grid grid-cols-3 grid-rows-2 gap-4 py-8">
+		<div class="grid grid-cols-3 grid-rows-2 gap-4 pt-8">
 			<div
 				v-for="feature of features"
 				:key="feature.name"

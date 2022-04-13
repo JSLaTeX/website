@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import type * as monaco from 'monaco-editor';
-import { debounce } from 'quasar';
 import { onMounted, watch } from 'vue';
 
 import { compileJsLatex } from '~/utils/latex.js';
