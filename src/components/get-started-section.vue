@@ -1,20 +1,32 @@
 <script setup lang="ts">
 import 'github-markdown-css';
+import 'highlight.js/styles/github.css';
+
+import hljs from 'highlight.js';
 import { outdent } from 'outdent';
+import { onMounted } from 'vue';
+
+const getStartedElement = $ref<HTMLDivElement>();
+onMounted(() => {
+	for (const el of getStartedElement.querySelectorAll('pre')) {
+		hljs.highlightElement(el);
+	}
+});
 
 const calledFromJsExample = outdent`
 	import { compileJsLatex, compileJsLatexFile } from 'jslatex';
 
 	const result = await compileJsLatex(String.raw\`
-	\\documentclass{article}
-	<?= "Hello from EJS!" ?>
+		\\documentclass{article}
+		<?= "Hello from EJS!" ?>
 	\`);
 
 	console.log(result);
 	/*
-	Outputs:
-	\\documentclass{article}
-	Hello from EJS!
+		Outputs:
+
+		\\documentclass{article}
+		Hello from EJS!
 	*/
 
 	// In order for dynamic \`import()\`s to work, you need to pass projectBaseUrl:
@@ -35,25 +47,25 @@ const myFileTex = outdent`
 </script>
 
 <template>
-	<div>
+	<div ref="getStartedElement" class="tab-2">
 		<h1 class="font-bold text-5xl text-center">Get Started</h1>
 		<div class="markdown-body m-8">
 			<h2>Installation</h2>
-			<pre>npm install --global jslatex</pre>
+			<pre class="language-bash">npm install --global jslatex</pre>
 
 			<h2>Command-line Usage</h2>
-			<div>
+			<p>
 				Create a file called <code>myfile.tex</code> in the current directory:
-			</div>
+			</p>
 
-			<pre>{{ myFileTex }}</pre>
+			<pre class="language-latex">{{ myFileTex }}</pre>
 
-			<div>Run the following code:</div>
-			<pre>jslatex myfile.tex -o mycompiledfile.tex</pre>
+			<p>Run the following code:</p>
+			<pre class='language-bash'>jslatex myfile.tex -o mycompiledfile.tex</pre>
 
 			<h2>Programmatic Usage</h2>
-			<div>JSLaTeX can also be called from JavaScript:</div>
-			<pre>{{ calledFromJsExample }}</pre>
+			<p>JSLaTeX can also be called from JavaScript:</p>
+			<pre class="language-typescript">{{ calledFromJsExample }}</pre>
 		</div>
 	</div>
 </template>

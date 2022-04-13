@@ -2,7 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@fontsource/inter': ^4.5.7
-  '@leonzalion/configs': ^1.2.8
+  '@leonzalion/configs': ^1.2.13
   '@mdi/js': ^6.6.96
   '@quasar/vite-plugin': ^1.0.9
   '@vitejs/plugin-vue': ^2.3.1
@@ -13,6 +13,7 @@ specifiers:
   esbuild-wasm: ^0.14.30
   eslint-define-config: ^1.3.0
   github-markdown-css: ^5.1.0
+  highlight.js: ^11.5.1
   jslatex: ^0.1.13
   lion-system: ^1.0.17
   monaco-editor: ^0.33.0
@@ -41,6 +42,7 @@ dependencies:
   dot-prop: 7.2.0
   esbuild-wasm: 0.14.30
   github-markdown-css: 5.1.0
+  highlight.js: 11.5.1
   jslatex: 0.1.13
   monaco-editor: 0.33.0
   onetime: 6.0.0
@@ -53,7 +55,7 @@ dependencies:
   windicss: 3.5.1
 
 devDependencies:
-  '@leonzalion/configs': 1.2.8_typescript@4.6.3
+  '@leonzalion/configs': 1.2.13_typescript@4.6.3
   '@quasar/vite-plugin': 1.0.9_8395baa52f7f62ff9223f4a629a65fbe
   '@vitejs/plugin-vue': 2.3.1_vite@2.9.1+vue@3.2.31
   '@windicss/plugin-animations': 1.0.9
@@ -317,8 +319,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@leonzalion/configs/1.2.8_typescript@4.6.3:
-    resolution: {integrity: sha512-xwX2xAJtkhyBnBwBBpKTJ+KoNIAvUU5K+/o+KXG6THcvK9/BnEMIdvy6DP6hf7JS9dUXEM4snsJc4l3ARKD1XA==}
+  /@leonzalion/configs/1.2.13_typescript@4.6.3:
+    resolution: {integrity: sha512-KRJnG3ple6t8VGyzO5COthaxcBLZe31WnKGYKgVMEwLIDpnsnt1KIXcEH9OddYdotqKI5szPAMxOPupzqxNBeg==}
     hasBin: true
     dependencies:
       '@commitlint/cli': 16.2.3_@swc+core@1.2.165
@@ -3135,6 +3137,11 @@ packages:
     dependencies:
       capital-case: 1.0.4
       tslib: 2.3.1
+    dev: false
+
+  /highlight.js/11.5.1:
+    resolution: {integrity: sha512-LKzHqnxr4CrD2YsNoIf/o5nJ09j4yi/GcH5BnYz9UnVpZdS4ucMgvP61TDty5xJcFGRjnH4DpujkS9bHT3hq0Q==}
+    engines: {node: '>=12.0.0'}
     dev: false
 
   /hosted-git-info/2.8.9:
