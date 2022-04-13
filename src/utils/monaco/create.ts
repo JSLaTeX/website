@@ -25,7 +25,7 @@ import jsLatexTmLanguage from './grammars/JSLaTeX.tmLanguage.json';
 import latexTmLanguage from './grammars/LaTeX.tmLanguage.json';
 import texTmLanguage from './grammars/TeX.tmLanguage.json';
 import typescriptTmLanguage from './grammars/TypeScript.tmLangauge.json';
-import type { ScopeName, ScopeNameInfo,TextMateGrammar } from './providers.js';
+import type { ScopeName, ScopeNameInfo, TextMateGrammar } from './providers.js';
 import { SimpleLanguageInfoProvider } from './providers.js';
 import type { LanguageId } from './register.js';
 import { registerLanguages } from './register.js';

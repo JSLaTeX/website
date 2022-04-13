@@ -26,7 +26,7 @@ function copyWasm(): Plugin {
 export default defineConfig({
 	resolve: {
 		alias: {
-			'~': join(import.meta.url, 'src')
+			'~': join(import.meta.url, 'src'),
 		},
 	},
 	plugins: [
@@ -39,9 +39,9 @@ export default defineConfig({
 		windiCss(),
 		quasar(),
 		copyWasm(),
-		jsImports()
+		jsImports(),
 	],
 	build: {
-		target: 'es2022'
+		target: 'es2022',
 	},
 });

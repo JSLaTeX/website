@@ -11,7 +11,7 @@ import type {
 	IRawTheme,
 	StackElement,
 } from 'vscode-textmate';
-import { INITIAL, parseRawGrammar,Registry } from 'vscode-textmate';
+import { INITIAL, parseRawGrammar, Registry } from 'vscode-textmate';
 
 import type { LanguageId, LanguageInfo } from './register.js';
 
