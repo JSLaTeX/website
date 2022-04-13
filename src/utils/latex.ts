@@ -1,5 +1,5 @@
-import * as jsLatex from 'jslatex';
 import esbuildWasm from 'esbuild-wasm';
+import * as jsLatex from 'jslatex';
 import onetime from 'onetime';
 
 const getEsbuild = onetime(async () => {

@@ -1,8 +1,6 @@
-/* eslint-disable import/extensions, node/file-extension-in-import */
-
+import animations from '@windicss/plugin-animations';
 import { defineConfig } from 'windicss/helpers';
 import typography from 'windicss/plugin/typography';
-import animations from '@windicss/plugin-animations';
 
 export default defineConfig({
 	shortcuts: {
@@ -18,5 +16,6 @@ export default defineConfig({
 			},
 		},
 	},
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 	plugins: [typography(), animations()],
 });

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mdiGithub, mdiLanguageJavascript, mdiHeart } from '@mdi/js';
+import { mdiGithub, mdiHeart,mdiLanguageJavascript } from '@mdi/js';
 
 const jsIconHover = $ref(false);
 </script>

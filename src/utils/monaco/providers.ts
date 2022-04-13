@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
 
 import type * as monaco from 'monaco-editor';
+import { Color } from 'monaco-editor/esm/vs/base/common/color.js';
+import { TokenizationRegistry } from 'monaco-editor/esm/vs/editor/common/languages.js';
+import { generateTokensCSSForColorMap } from 'monaco-editor/esm/vs/editor/common/languages/supports/tokenization.js';
 import type {
 	IGrammar,
+	IOnigLib,
 	IRawGrammar,
 	IRawTheme,
-	IOnigLib,
 	StackElement,
 } from 'vscode-textmate';
+import { INITIAL, parseRawGrammar,Registry } from 'vscode-textmate';
 
-import { INITIAL, Registry, parseRawGrammar } from 'vscode-textmate';
-import { generateTokensCSSForColorMap } from 'monaco-editor/esm/vs/editor/common/languages/supports/tokenization.js';
-import { TokenizationRegistry } from 'monaco-editor/esm/vs/editor/common/languages.js';
-import { Color } from 'monaco-editor/esm/vs/base/common/color.js';
 import type { LanguageId, LanguageInfo } from './register.js';
 
 type Monaco = typeof monaco;

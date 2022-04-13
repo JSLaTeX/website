@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { onMounted, watch } from 'vue';
-import type * as monaco from 'monaco-editor';
 import { useWindowSize } from '@vueuse/core';
+import type * as monaco from 'monaco-editor';
+import { debounce } from 'quasar';
+import { onMounted, watch } from 'vue';
+
 import { compileJsLatex } from '~/utils/latex.js';
 import { createMonacoEditor } from '~/utils/monaco/create.js';
 
@@ -15,12 +17,20 @@ monacoEditorElement.style.height = '100%';
 const monacoDisplayElement = document.createElement('div');
 monacoDisplayElement.style.height = '100%';
 
+let editor: monaco.editor.IStandaloneCodeEditor | undefined;
+let display: monaco.editor.IStandaloneCodeEditor | undefined;
+
 const monacoEditorElementContainer = $ref<HTMLElement>();
 const monacoDisplayElementContainer = $ref<HTMLElement>();
+const resizeObserver = new ResizeObserver(() => {
+	editor?.layout();
+	display?.layout();
+});
 
 watch(
 	() => monacoEditorElementContainer,
 	(container) => {
+		resizeObserver.observe(container);
 		container.insertBefore(monacoEditorElement, null);
 	}
 );
@@ -28,12 +38,10 @@ watch(
 watch(
 	() => monacoDisplayElementContainer,
 	(container) => {
+		resizeObserver.observe(container);
 		container.insertBefore(monacoDisplayElement, null);
 	}
 );
-
-let editor: monaco.editor.IStandaloneCodeEditor | undefined;
-let display: monaco.editor.IStandaloneCodeEditor | undefined;
 
 const latexOnlineIframe = $ref<HTMLIFrameElement>();
 
@@ -57,11 +65,6 @@ onMounted(async () => {
 
 	editor.getModel()?.onDidChangeContent(async () => {
 		await compileLatex();
-	});
-
-	window.addEventListener('resize', async () => {
-		editor?.layout();
-		display?.layout();
 	});
 });
 
@@ -98,7 +101,6 @@ mixin embedJavaScriptInLatex
 			| Edit the code below to change the compiled output !{' '}
 			span(v-if='$q.screen.lt.md') below!
 			span(v-else) on the right!
-
 
 mixin getRegularLatexOut
 	div(class="column m-2")

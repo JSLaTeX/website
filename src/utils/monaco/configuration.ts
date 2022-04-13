@@ -1,5 +1,5 @@
-import type * as monaco from 'monaco-editor';
 import { getProperty, setProperty } from 'dot-prop';
+import type * as monaco from 'monaco-editor';
 
 /**
 	Fields that, if present in a LanguageConfiguration, must be a RegExp object rather than a string literal.

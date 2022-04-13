@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import jslatexDemo from './jslatex-demo.vue';
 import '@fontsource/inter';
 import '@fontsource/inter/variable.css';
+
+import jslatexDemo from './jslatex-demo.vue';
 </script>
 
 <template>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {
-	mdiWrench,
+	mdiHeart,
 	mdiLanguageJavascript,
 	mdiPuzzle,
 	mdiSpeedometer,
-	mdiHeart,
 	mdiWeb,
+	mdiWrench,
 } from '@mdi/js';
 
 type Feature = {

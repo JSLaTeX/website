@@ -1,11 +1,11 @@
-import * as fs from 'node:fs';
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import windiCss from 'vite-plugin-windicss';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
-import type { Plugin } from 'rollup';
+import vue from '@vitejs/plugin-vue';
 import { join } from 'desm';
+import * as fs from 'node:fs';
+import type { Plugin } from 'rollup';
+import { defineConfig } from 'vite';
 import jsImports from 'vite-plugin-js-imports';
+import windiCss from 'vite-plugin-windicss';
 
 function copyWasm(): Plugin {
 	return {

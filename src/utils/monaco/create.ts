@@ -9,25 +9,26 @@
 //
 // because we are shipping only a subset of the languages.
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
+import { outdent } from 'outdent';
 import {
 	createOnigScanner,
 	createOnigString,
 	loadWASM,
 } from 'vscode-oniguruma';
-import { outdent } from 'outdent';
-import type { LanguageId } from './register.js';
-import type { ScopeName, TextMateGrammar, ScopeNameInfo } from './providers.js';
 
-import { SimpleLanguageInfoProvider } from './providers.js';
-import { registerLanguages } from './register.js';
-import { rehydrateRegexps } from './configuration.js';
-import jsLatexTmLanguage from './grammars/JSLaTeX.tmLanguage.json';
-import jsLatexConfiguration from './configurations/jslatex.json';
-import latexTmLanguage from './grammars/LaTeX.tmLanguage.json';
-import typescriptTmLanguage from './grammars/TypeScript.tmLangauge.json';
-import texTmLanguage from './grammars/TeX.tmLanguage.json';
-import atomOneLightTheme from './atom-one-light-theme.js';
 import { compileJsLatex } from '~/utils/latex.js';
+
+import atomOneLightTheme from './atom-one-light-theme.js';
+import { rehydrateRegexps } from './configuration.js';
+import jsLatexConfiguration from './configurations/jslatex.json';
+import jsLatexTmLanguage from './grammars/JSLaTeX.tmLanguage.json';
+import latexTmLanguage from './grammars/LaTeX.tmLanguage.json';
+import texTmLanguage from './grammars/TeX.tmLanguage.json';
+import typescriptTmLanguage from './grammars/TypeScript.tmLangauge.json';
+import type { ScopeName, ScopeNameInfo,TextMateGrammar } from './providers.js';
+import { SimpleLanguageInfoProvider } from './providers.js';
+import type { LanguageId } from './register.js';
+import { registerLanguages } from './register.js';
 
 interface DemoScopeNameInfo extends ScopeNameInfo {
 	path: string;
