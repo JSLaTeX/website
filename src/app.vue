@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
+import DocumentationSection from '~/components/documentation-section.vue';
 import FeaturesSection from '~/components/features-section.vue';
 import FooterSection from '~/components/footer-section.vue';
 import GetStartedSection from '~/components/get-started-section.vue';
@@ -20,6 +21,7 @@ onMounted(() => {
 		<div class="column gap-8 max-w-6xl">
 			<features-section />
 			<get-started-section />
+			<documentation-section />
 		</div>
 		<footer-section class="self-stretch" />
 	</div>

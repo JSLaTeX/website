@@ -61,7 +61,7 @@ const myFileTex = outdent`
 			<pre class="language-latex">{{ myFileTex }}</pre>
 
 			<p>Run the following code:</p>
-			<pre class='language-bash'>jslatex myfile.tex -o mycompiledfile.tex</pre>
+			<pre class="language-bash">jslatex myfile.tex -o mycompiledfile.tex</pre>
 
 			<h2>Programmatic Usage</h2>
 			<p>JSLaTeX can also be called from JavaScript:</p>

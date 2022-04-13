@@ -6,43 +6,66 @@ import { onMounted, watch } from 'vue';
 import { compileJsLatex } from '~/utils/latex.js';
 import { createMonacoEditor } from '~/utils/monaco/create.js';
 
-const windowSize = useWindowSize();
+function useEditor() {
+	const monacoEditorElement = document.createElement('div');
+	monacoEditorElement.style.height = '100%';
+	const monacoDisplayElement = document.createElement('div');
+	monacoDisplayElement.style.height = '100%';
 
-const windowWidth = $computed(() => windowSize.width.value);
-const windowHeight = $computed(() => windowSize.width.value);
+	let editor: monaco.editor.IStandaloneCodeEditor | undefined;
+	let display: monaco.editor.IStandaloneCodeEditor | undefined;
 
-const monacoEditorElement = document.createElement('div');
-monacoEditorElement.style.height = '100%';
-const monacoDisplayElement = document.createElement('div');
-monacoDisplayElement.style.height = '100%';
+	onMounted(async () => {
+		editor = await createMonacoEditor(monacoEditorElement);
+		display = await createMonacoEditor(monacoDisplayElement, {
+			readonly: true,
+		});
+	});
 
-let editor: monaco.editor.IStandaloneCodeEditor | undefined;
-let display: monaco.editor.IStandaloneCodeEditor | undefined;
+	const resizeObserver = new ResizeObserver(() => {
+		editor?.layout();
+		display?.layout();
+	});
 
-const monacoEditorElementContainer = $ref<HTMLElement>();
-const monacoDisplayElementContainer = $ref<HTMLElement>();
-const resizeObserver = new ResizeObserver(() => {
-	editor?.layout();
-	display?.layout();
-});
+	// Whenever the monaco editor element's ref changes (i.e. when the screen is resized and the alternative editor layout renders with new HTML elements, re-insert the `monacoEditorElement` into the DOM)
+	const monacoEditorElementContainer = $ref<HTMLElement>();
+	watch(
+		() => monacoEditorElementContainer,
+		(container) => {
+			resizeObserver.observe(container);
+			container.insertBefore(monacoEditorElement, null);
+		}
+	);
 
-watch(
-	() => monacoEditorElementContainer,
-	(container) => {
-		resizeObserver.observe(container);
-		container.insertBefore(monacoEditorElement, null);
-	}
-);
+	const monacoDisplayElementContainer = $ref<HTMLElement>();
+	watch(
+		() => monacoDisplayElementContainer,
+		(container) => {
+			resizeObserver.observe(container);
+			container.insertBefore(monacoDisplayElement, null);
+		}
+	);
 
-watch(
-	() => monacoDisplayElementContainer,
-	(container) => {
-		resizeObserver.observe(container);
-		container.insertBefore(monacoDisplayElement, null);
-	}
-);
+	return {
+		editor,
+		display,
+		...$$({
+			monacoEditorElement,
+			monacoDisplayElement,
+			monacoEditorElementContainer,
+			monacoDisplayElementContainer,
+		}),
+	};
+}
 
-const latexOnlineIframe = $ref<HTMLIFrameElement>();
+const {
+	editor,
+	display,
+	// @ts-expect-error: Used in pug template
+	monacoDisplayElementContainer,
+	// @ts-expect-error: Used in pug template
+	monacoEditorElementContainer,
+} = useEditor();
 
 async function compileLatex() {
 	try {
@@ -57,10 +80,9 @@ async function compileLatex() {
 }
 
 onMounted(async () => {
-	editor = await createMonacoEditor(monacoEditorElement);
-	display = await createMonacoEditor(monacoDisplayElement, {
-		readonly: true,
-	});
+	if (editor === undefined) {
+		throw new Error('Editor was not mounted.');
+	}
 
 	editor.getModel()?.onDidChangeContent(async () => {
 		await compileLatex();
@@ -89,6 +111,12 @@ async function compileLatexPdf() {
 		latex
 	)}`;
 }
+
+// Variables used for the LatexOnline PDF <iframe> element
+const windowSize = useWindowSize();
+const latexOnlineIframe = $ref<HTMLIFrameElement>();
+const windowWidth = $computed(() => windowSize.width.value);
+const windowHeight = $computed(() => windowSize.width.value);
 </script>
 
 <template lang="pug">
