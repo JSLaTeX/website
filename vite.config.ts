@@ -41,4 +41,7 @@ export default defineConfig({
 		copyWasm(),
 		jsImports(),
 	],
+	build: {
+		minify: false,
+	},
 });

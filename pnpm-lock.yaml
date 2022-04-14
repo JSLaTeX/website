@@ -14,7 +14,7 @@ specifiers:
   eslint-define-config: ^1.3.0
   github-markdown-css: ^5.1.0
   highlight.js: ^11.5.1
-  jslatex: ^0.2.0
+  jslatex: ^0.2.1
   lion-system: ^1.0.17
   monaco-editor: ^0.33.0
   onetime: ^6.0.0
@@ -43,7 +43,7 @@ dependencies:
   esbuild-wasm: 0.14.30
   github-markdown-css: 5.1.0
   highlight.js: 11.5.1
-  jslatex: 0.2.0
+  jslatex: 0.2.1
   monaco-editor: 0.33.0
   onetime: 6.0.0
   outdent: 0.8.0
@@ -3869,8 +3869,8 @@ packages:
       argparse: 2.0.1
     dev: true
 
-  /jslatex/0.2.0:
-    resolution: {integrity: sha512-OmXN4NB9yndg0/Fp5y4HJjVJ8Zv6FFGE9R0O05zpPBs42hWdx+zBUgFWJoDgnomErFtxyq2mo7TQr2AQ1h1Isw==}
+  /jslatex/0.2.1:
+    resolution: {integrity: sha512-OyyvD1PbsZgoYphwIiAavaCv1nK/+uB/yEUDoD73bShpDP4hhnnz+Edqg9EBjq706XXMltYlIIJf0S6gzcasdw==}
     hasBin: true
     dependencies:
       commander: 9.1.0
