@@ -16,9 +16,9 @@ onMounted(() => {
 </script>
 
 <template>
-	<div class="column items-center h-full gap-8">
+	<div class="column items-center h-full min-w-xl gap-8">
 		<landing-banner />
-		<div class="column gap-8 max-w-6xl">
+		<div class="column gap-8 max-w-6xl w-full">
 			<features-section />
 			<get-started-section />
 			<documentation-section />

@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-	<div>
+	<div class="w-full">
 		<h1 class="text-center font-bold text-4xl">Documentation</h1>
 		<div class="column items-center markdown-body p-8">
 			<h2>Tags</h2>
