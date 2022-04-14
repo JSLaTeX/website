@@ -16,13 +16,21 @@ onMounted(() => {
 </script>
 
 <template>
-	<div class="column items-center gap-8">
+	<div class="column items-center h-full gap-8">
 		<landing-banner />
 		<div class="column gap-8 max-w-6xl">
 			<features-section />
 			<get-started-section />
 			<documentation-section />
 		</div>
-		<footer-section class="self-stretch" />
+		<footer-section class="self-stretch mt-auto" />
 	</div>
 </template>
+
+<style>
+body,
+html,
+#app {
+	height: 100%;
+}
+</style>
