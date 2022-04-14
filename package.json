@@ -20,7 +20,7 @@
 		"esbuild-wasm": "^0.14.30",
 		"github-markdown-css": "^5.1.0",
 		"highlight.js": "^11.5.1",
-		"jslatex": "^0.2.1",
+		"jslatex": "^0.2.2",
 		"monaco-editor": "^0.33.0",
 		"onetime": "^6.0.0",
 		"outdent": "^0.8.0",

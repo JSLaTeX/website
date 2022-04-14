@@ -14,7 +14,7 @@ specifiers:
   eslint-define-config: ^1.3.0
   github-markdown-css: ^5.1.0
   highlight.js: ^11.5.1
-  jslatex: ^0.2.1
+  jslatex: ^0.2.2
   lion-system: ^1.0.17
   monaco-editor: ^0.33.0
   onetime: ^6.0.0
@@ -43,7 +43,7 @@ dependencies:
   esbuild-wasm: 0.14.30
   github-markdown-css: 5.1.0
   highlight.js: 11.5.1
-  jslatex: 0.2.1
+  jslatex: 0.2.2
   monaco-editor: 0.33.0
   onetime: 6.0.0
   outdent: 0.8.0
@@ -1971,8 +1971,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /embedded-ts/0.2.0:
-    resolution: {integrity: sha512-A9WMs5BEwiV5l0TUfm2sbmSHUF4aXxkG2vSROD3E1BhrYaOsphQ+23chPu+yYTXs/1/Q2Fyl/lBGZafT1xLaow==}
+  /embedded-ts/0.2.1:
+    resolution: {integrity: sha512-4Wp1tWklMknWEXDzHcYmOYrUnWZDVK6CFhzgzBlsE8gcNuSC9H57K9SRsNhgMD+g1dcZLfFPVfy+wqWuUrQb6Q==}
     hasBin: true
     dependencies:
       change-case: 4.1.2
@@ -3869,12 +3869,12 @@ packages:
       argparse: 2.0.1
     dev: true
 
-  /jslatex/0.2.1:
-    resolution: {integrity: sha512-OyyvD1PbsZgoYphwIiAavaCv1nK/+uB/yEUDoD73bShpDP4hhnnz+Edqg9EBjq706XXMltYlIIJf0S6gzcasdw==}
+  /jslatex/0.2.2:
+    resolution: {integrity: sha512-0LCh6EfC/cHFw/LkiC2ZGq6+AECijRNh41+fyY9+nNoHjlhsbnz+KxeQlJsy/mM+NcxbmLBWP1wanv3IL1yCAw==}
     hasBin: true
     dependencies:
       commander: 9.1.0
-      embedded-ts: 0.2.0
+      embedded-ts: 0.2.1
       escape-latex: 1.2.0
       escape-string-regexp: 5.0.0
       outdent: 0.8.0
