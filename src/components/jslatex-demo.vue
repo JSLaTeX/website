@@ -79,15 +79,17 @@ async function compileLatex() {
 	}
 }
 
-onMounted(async () => {
-	if (editor === undefined) {
-		throw new Error('Editor was not mounted.');
+// Compile the LaTeX whenever the editor is changed
+watch(
+	() => editor,
+	() => {
+		if (editor !== undefined) {
+			editor.getModel()?.onDidChangeContent(async () => {
+				await compileLatex();
+			});
+		}
 	}
-
-	editor.getModel()?.onDidChangeContent(async () => {
-		await compileLatex();
-	});
-});
+);
 
 const latexCompileError = $ref('');
 

@@ -41,7 +41,4 @@ export default defineConfig({
 		copyWasm(),
 		jsImports(),
 	],
-	build: {
-		target: 'es2022'
-	}
 });
