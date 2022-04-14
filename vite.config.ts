@@ -40,5 +40,8 @@ export default defineConfig({
 		quasar(),
 		copyWasm(),
 		jsImports(),
-	]
+	],
+	build: {
+		target: 'es2022'
+	}
 });
