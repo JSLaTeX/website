@@ -3,9 +3,9 @@ const { defineConfig } = require('eslint-define-config');
 
 module.exports = defineConfig({
 	extends: require.resolve('@leonzalion/configs/eslint.cjs'),
-	parser: 'vue-eslint-parser',
 	parserOptions: {
-		project: path.resolve(__dirname, 'tsconfig.eslint.json')
+		project: path.resolve(__dirname, 'tsconfig.eslint.json'),
+		extraFileExtensions: ['vue']
 	},
 	rules: {
 		'vue/no-v-html': 'off',

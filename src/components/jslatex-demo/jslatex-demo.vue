@@ -1,103 +1,10 @@
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
-import type * as monaco from 'monaco-editor';
-import { useQuasar } from 'quasar';
-import { h, onMounted, watch } from 'vue';
+import { watch } from 'vue';
+import { useEditor } from '~/utils/editor.js';
+import EditableJsLatexSection from '~/components/jslatex-demo/editable-jslatex-section.vue';
 
 import { compileJsLatex } from '~/utils/latex.js';
-import { createMonacoEditor } from '~/utils/monaco/create.js';
-
-import EmbedJavaScriptInLatex from './embed-javascript-in-latex.vue';
-import GetRegularLatexOut from './get-regular-latex-out.vue';
-import MonacoDisplayElement from './monaco-display-element.vue';
-import MonacoEditorElement from './monaco-editor-element.vue';
-
-function EditableJsLatexSection() {
-	const $q = useQuasar();
-
-	if ($q.screen.lt.md) {
-		return h(
-			'div',
-			{
-				class: 'mx-8 border-2 border-black',
-			},
-			[
-				h(EmbedJavaScriptInLatex),
-				h(MonacoEditorElement),
-				h(GetRegularLatexOut),
-				h(MonacoDisplayElement),
-			]
-		);
-	} else {
-		return h(
-			'div',
-			{
-				class: 'mx-8 border-2 border-black column h-120',
-			},
-			[
-				h('div', { class: 'row' }, [
-					h('div', { class: 'flex-1' }, h(EmbedJavaScriptInLatex)),
-					h('div', { class: 'flex-1' }, h(GetRegularLatexOut)),
-				]),
-				h('div', { class: 'grid grid-cols-2 flex-1' }, [
-					h('div', { class: 'w-full' }, h(MonacoEditorElement)),
-					h('div', { class: 'w-full' }, h(MonacoDisplayElement)),
-				]),
-			]
-		);
-	}
-}
-
-const monacoEditorComponent = $ref();
-const monacoDisplayComponent = $ref();
-
-function useEditor() {
-	const monacoEditorElement = document.createElement('div');
-	monacoEditorElement.style.height = '100%';
-	const monacoDisplayElement = document.createElement('div');
-	monacoDisplayElement.style.height = '100%';
-
-	let editor: monaco.editor.IStandaloneCodeEditor | undefined;
-	let display: monaco.editor.IStandaloneCodeEditor | undefined;
-
-	onMounted(async () => {
-		editor = await createMonacoEditor(monacoEditorElement);
-		display = await createMonacoEditor(monacoDisplayElement, {
-			readonly: true,
-		});
-	});
-
-	const resizeObserver = new ResizeObserver(() => {
-		editor?.layout();
-		display?.layout();
-	});
-
-	// Whenever the monaco editor element's ref changes (i.e. when the screen is resized and the alternative editor layout renders with new HTML elements, re-insert the `monacoEditorElement` into the DOM)
-	watch(
-		() => monacoEditorComponent?.container,
-		(container) => {
-			resizeObserver.observe(container);
-			container.insertBefore(monacoEditorElement, null);
-		}
-	);
-
-	watch(
-		() => monacoDisplayComponent?.container,
-		(container) => {
-			resizeObserver.observe(container);
-			container.insertBefore(monacoDisplayElement, null);
-		}
-	);
-
-	return {
-		editor,
-		display,
-		...$$({
-			monacoEditorElement,
-			monacoDisplayElement,
-		}),
-	};
-}
 
 const { editor, display } = useEditor();
 
