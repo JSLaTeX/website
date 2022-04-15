@@ -5,15 +5,17 @@ import EmbedJavascriptInLatex from '~/components/jslatex-demo/embed-javascript-i
 import GetRegularLatexOut from '~/components/jslatex-demo/get-regular-latex-out.vue';
 import { useEditor } from '~/utils/editor.js';
 
-const { editors, monacoDisplayElement, monacoEditorElement } =
-	useEditor();
+const { display, editor, monacoDisplayElement, monacoEditorElement } = $(
+	useEditor()
+);
 
 const resizeObserver = new ResizeObserver(() => {
-	editors.display?.layout();
-	editors.editor?.layout();
+	display?.layout();
+	editor?.layout();
 });
 
 function updateEditors() {
+	console.log('i');
 	const editorElement = document.querySelector('#editor')!;
 	editorElement.insertBefore(monacoEditorElement, null);
 	resizeObserver.observe(editorElement);

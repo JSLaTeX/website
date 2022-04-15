@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import { watch } from 'vue';
-import { useEditor } from '~/utils/editor.js';
-import EditableJsLatexSection from '~/components/jslatex-demo/editable-jslatex-section.vue';
 
+import EditableJsLatexSection from '~/components/jslatex-demo/editable-jslatex-section.vue';
+import { useEditor } from '~/utils/editor.js';
 import { compileJsLatex } from '~/utils/latex.js';
 
-const { editor, display } = useEditor();
+const { editor, display } = $(useEditor());
 
 async function compileLatex() {
 	try {
@@ -20,15 +20,13 @@ async function compileLatex() {
 	}
 }
 
-// Compile the LaTeX whenever the editor is changed
 watch(
 	() => editor,
 	() => {
-		if (editor !== undefined) {
-			editor.getModel()?.onDidChangeContent(async () => {
-				await compileLatex();
-			});
-		}
+		// Compile the LaTeX whenever the editor is changed
+		editor?.getModel()?.onDidChangeContent(async () => {
+			await compileLatex();
+		});
 	}
 );
 
