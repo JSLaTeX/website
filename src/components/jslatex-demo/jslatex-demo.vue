@@ -1,10 +1,55 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import type * as monaco from 'monaco-editor';
-import { onMounted, watch } from 'vue';
+import { useQuasar } from 'quasar';
+import { h, onMounted, watch } from 'vue';
 
 import { compileJsLatex } from '~/utils/latex.js';
 import { createMonacoEditor } from '~/utils/monaco/create.js';
+
+import EmbedJavaScriptInLatex from './embed-javascript-in-latex.vue';
+import GetRegularLatexOut from './get-regular-latex-out.vue';
+import MonacoDisplayElement from './monaco-display-element.vue';
+import MonacoEditorElement from './monaco-editor-element.vue';
+
+function EditableJsLatexSection() {
+	const $q = useQuasar();
+
+	if ($q.screen.lt.md) {
+		return h(
+			'div',
+			{
+				class: 'mx-8 border-2 border-black',
+			},
+			[
+				h(EmbedJavaScriptInLatex),
+				h(MonacoEditorElement),
+				h(GetRegularLatexOut),
+				h(MonacoDisplayElement),
+			]
+		);
+	} else {
+		return h(
+			'div',
+			{
+				class: 'mx-8 border-2 border-black column h-120',
+			},
+			[
+				h('div', { class: 'row' }, [
+					h('div', { class: 'flex-1' }, h(EmbedJavaScriptInLatex)),
+					h('div', { class: 'flex-1' }, h(GetRegularLatexOut)),
+				]),
+				h('div', { class: 'grid grid-cols-2 flex-1' }, [
+					h('div', { class: 'w-full' }, h(MonacoEditorElement)),
+					h('div', { class: 'w-full' }, h(MonacoDisplayElement)),
+				]),
+			]
+		);
+	}
+}
+
+const monacoEditorComponent = $ref();
+const monacoDisplayComponent = $ref();
 
 function useEditor() {
 	const monacoEditorElement = document.createElement('div');
@@ -28,18 +73,16 @@ function useEditor() {
 	});
 
 	// Whenever the monaco editor element's ref changes (i.e. when the screen is resized and the alternative editor layout renders with new HTML elements, re-insert the `monacoEditorElement` into the DOM)
-	const monacoEditorElementContainer = $ref<HTMLElement>();
 	watch(
-		() => monacoEditorElementContainer,
+		() => monacoEditorComponent?.container,
 		(container) => {
 			resizeObserver.observe(container);
 			container.insertBefore(monacoEditorElement, null);
 		}
 	);
 
-	const monacoDisplayElementContainer = $ref<HTMLElement>();
 	watch(
-		() => monacoDisplayElementContainer,
+		() => monacoDisplayComponent?.container,
 		(container) => {
 			resizeObserver.observe(container);
 			container.insertBefore(monacoDisplayElement, null);
@@ -52,20 +95,11 @@ function useEditor() {
 		...$$({
 			monacoEditorElement,
 			monacoDisplayElement,
-			monacoEditorElementContainer,
-			monacoDisplayElementContainer,
 		}),
 	};
 }
 
-const {
-	editor,
-	display,
-	// @ts-expect-error: Used in pug template
-	monacoDisplayElementContainer,
-	// @ts-expect-error: Used in pug template
-	monacoEditorElementContainer,
-} = useEditor();
+const { editor, display } = useEditor();
 
 async function compileLatex() {
 	try {
@@ -119,71 +153,11 @@ const windowSize = useWindowSize();
 const latexOnlineIframe = $ref<HTMLIFrameElement>();
 const windowWidth = $computed(() => windowSize.width.value);
 const windowHeight = $computed(() => windowSize.width.value);
-
-const EmbedJavaScriptInLatex = (
-	<div class="column m-2">
-		<div class="font-bold text-center text-xl">
-			Embed JavaScript in LaTeX...
-		</div>
-		<div class="text-sm text-center">
-			Edit the code below to change the compiled output
-			<span v-if="$q.screen.lt.md">below!</span>
-			<span v-else>on the right!</span>
-		</div>
-	</div>
-);
-
-const GetRegularLatexOut = (
-	<div class="column m-2">
-		<div class="font-bold text-center text-xl">Get regular LateX out!</div>
-		<div class="text-sm text-center">
-			Press the Render PDF button below to render the below LaTeX as a PDF.
-		</div>
-	</div>
-);
-
-const MonacoEditorElement = (
-	<div class="overflow-hidden h-full">
-		<div class="h-full" ref="monacoEditorElementContainer"></div>
-	</div>
-);
-
-const MonacoDisplayElement = (
-	<div class="overflow-hidden h-full">
-		<div class="h-full" ref="monacoDisplayElementContainer"></div>
-	</div>
-);
 </script>
 
 <template>
 	<div class="column w-full">
-		<!-- For smaller screens -->
-		<div v-if="$q.screen.lt.md" class="mx-8 border-2 border-black">
-			<EmbedJavaScriptInLatex />
-			<MonacoEditorElement class="h-60" />
-			<GetRegularLatexOut />
-			<MonacoDisplayElement class="h-60" />
-		</div>
-
-		<!-- On larger screens, use a flexbox -->
-		<div v-else class="mx-8 border-2 border-black column h-120">
-			<div class="row">
-				<div class="flex-1">
-					<EmbedJavaScriptInLatex />
-				</div>
-				<div class="flex-1">
-					<GetRegularLatexOut />
-				</div>
-			</div>
-			<div class="grid grid-cols-2 flex-1">
-				<div class="w-full">
-					<MonacoEditorElement class="h-60" />
-				</div>
-				<div class="w-full">
-					<MonacoDisplayElement class="h-60" />
-				</div>
-			</div>
-		</div>
+		<EditableJsLatexSection />
 
 		<!-- Render PDF Section -->
 		<div class="column items-center mt-4 mb-3">
@@ -203,12 +177,13 @@ const MonacoDisplayElement = (
 			</button>
 
 			<span class="text-xs text-gray-600">
-				Powered by !{' '}
+				Powered by
 				<a
 					class="text-blue-400 underline hover:text-blue-500"
 					href="https://github.com/aslushnikov/latex-online"
-					>LatexOnline</a
 				>
+					LatexOnline
+				</a>
 			</span>
 			<div>{{ latexCompileError }}</div>
 		</div>

@@ -2,7 +2,7 @@
 import '@fontsource/inter';
 import '@fontsource/inter/variable.css';
 
-import jslatexDemo from './jslatex-demo.vue';
+import jslatexDemo from './jslatex-demo/jslatex-demo.vue';
 </script>
 
 <template>
