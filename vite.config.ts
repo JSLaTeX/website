@@ -1,5 +1,6 @@
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import { join } from 'desm';
 import * as fs from 'node:fs';
 import type { Plugin } from 'rollup';
@@ -40,6 +41,7 @@ export default defineConfig({
 		quasar(),
 		copyWasm(),
 		jsImports(),
+		vueJsx(),
 	],
 	build: {
 		minify: false,
